@@ -17,16 +17,16 @@ This is a modular ecommerce frontend project built with **React + Vite**. It use
 
 ```
 src/
-🔼📀 assets/                # Images, logos, etc.
-🔼📀 components/            # Reusable components like Button, Navbar
-🔼📀 pages/
-🔼🔼📀 Auth/              # Login, Register, Profile
-🔼🔼📀 Home/              # Home Page, Header, Footer
-🔼🔼📀 Products/          # Product Grid, Filters, Search
-🔼🔼📀 Cart/              # Cart, Checkout, Order Summary
-🔼🔼📀 Admin/             # Admin Dashboard, Manage Users/Products
-🔼 App.jsx                # Main app with routes
-🔼 main.jsx               # ReactDOM entry point
+📂 assets/                # Images, logos, etc.
+📂 components/            # Reusable components like Button, Navbar
+📂 pages/
+📂📂 Auth/              # Login, Register, Profile
+📂📂 Home/              # Home Page, Header, Footer
+📂📂 Products/          # Product Grid, Filters, Search
+📂📂 Cart/              # Cart, Checkout, Order Summary
+📂📂 Admin/             # Admin Dashboard, Manage Users/Products
+📄 App.jsx                # Main app with routes
+📄 main.jsx               # ReactDOM entry point
 ```
 
 ---
@@ -56,7 +56,7 @@ npm run dev
 
 ## 👥 Team Collaboration Guidelines
 
-### ➔ Branch Naming Convention
+### → Branch Naming Convention
 
 | Feature                        | Branch Name               |
 | ------------------------------ | ------------------------- |
@@ -68,9 +68,9 @@ npm run dev
 
 ---
 
-## 🔀 Git Workflow
+## 🔁 Git Workflow
 
-> Every member works on a separate feature branch and pushes to GitHub.
+> All changes must go through a pull request. Direct pushes to `main` are **not allowed**.
 
 ### ✅ Step-by-Step
 
@@ -93,14 +93,29 @@ npm run dev
    git push -u origin feature/your-feature-name
    ```
 
-4. **After testing, merge your branch into `main`**:
+4. **Create a Pull Request (PR)**:
 
-   ```bash
-   git checkout main
-   git pull origin main
-   git merge feature/your-feature-name
-   git push origin main
-   ```
+   * Go to GitHub
+   * Click on "Compare & pull request"
+   * Add a title and description
+   * Assign a reviewer (any team member)
+
+5. **Get your PR reviewed and approved**
+
+   * 1 approval is required (can be from any team member)
+   * All code review comments must be resolved
+
+6. **Squash merge** your PR to `main`
+
+---
+
+## 🛡️ Main Branch Protection Rules (Enforced)
+
+* Pull Requests are required to merge into `main`
+* Direct pushes to `main` are blocked
+* At least **1 approval** is required
+* All review conversations must be resolved
+* Squash merge only
 
 ---
 
@@ -118,10 +133,20 @@ npm run dev
 
 ## 🤝 Contributing
 
-* Each contributor should work on **separate branches**
-* Avoid working directly on `main`
-* Follow the structure and naming conventions
-* Use `pull requests` for collaboration (optional but recommended)
+* Each contributor works on a **feature branch**
+* Open a Pull Request for review
+* Get 1 approval and resolve all comments before merging
+* Follow folder and component structure guidelines
+
+### 🔍 Pull Request Review Checklist:
+
+* [ ] Is the code working without errors?
+* [ ] Is the file/folder naming consistent?
+* [ ] Are components reusable if needed?
+* [ ] Are there any unnecessary console logs?
+* [ ] Is the code easy to understand?
+
+> ✅ Note: Any teammate can review a PR. Please review each other’s code before merging.
 
 ---
 
