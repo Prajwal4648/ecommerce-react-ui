@@ -6,5 +6,5 @@ export const ADMIN_CREDENTIALS = {
 };
 
 export const KEY_IS_ADMIN = 'myApp_isAdmin';
-export const KEY_PRODUCTS = 'myApp_products'; // ✅ Add this line
-export const KEY_USERS = 'myApp_users';       // (optional for later)
+export const KEY_PRODUCTS = 'myApp_products'; 
+export const KEY_USERS = 'myApp_users';       
