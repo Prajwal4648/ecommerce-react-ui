@@ -1,20 +1,34 @@
 // src/pages/Admin/ManageProducts/ProductList.jsx
 import { useEffect, useState } from 'react';
-import { seedProducts, getProducts } from './productService';
+import { useNavigate } from 'react-router-dom';
+import { seedProducts, getProducts, saveProducts } from './productService';
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function init() {
-      await seedProducts();
+      await seedProducts(); // Fetches and saves to localStorage if not present
       setProducts(getProducts());
     }
     init();
   }, []);
 
+  const handleDelete = (id) => {
+    if (!window.confirm('Are you sure you want to delete this product?')) return;
+
+    const updated = products.filter((p) => p.id !== id);
+    saveProducts(updated);
+    setProducts(updated);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/admin/manage-products/edit/${id}`);
+  };
+
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <h2>Manage Products</h2>
       <table border="1" cellPadding="10">
         <thead>
@@ -34,8 +48,8 @@ export default function ProductList() {
               <td>{prod.price}</td>
               <td>{prod.category}</td>
               <td>
-                <button>Edit</button>{' '}
-                <button>Delete</button>
+                <button onClick={() => handleEdit(prod.id)}>Edit</button>{' '}
+                <button onClick={() => handleDelete(prod.id)}>Delete</button>
               </td>
             </tr>
           ))}

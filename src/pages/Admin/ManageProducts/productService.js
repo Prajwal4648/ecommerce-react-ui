@@ -22,3 +22,21 @@ export async function seedProducts() {
   const products = await fetchAllProducts();
   saveProducts(products);
 }
+
+//edit and delete 
+
+// Delete a product by id
+export function deleteProduct(id) {
+  const products = getProducts();
+  const updated = products.filter((p) => p.id !== id);
+  saveProducts(updated);
+}
+
+// Update an existing product by id
+export function updateProduct(id, updatedData) {
+  const products = getProducts();
+  const updated = products.map((p) =>
+    p.id === id ? { ...p, ...updatedData } : p
+  );
+  saveProducts(updated);
+}
