@@ -1,17 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AdminDashboard from './pages/Admin/AdminDashboard';
-import ManageUsers from './pages/Admin/ManageUsers';
-import ManageProducts from './pages/Admin/ManageProducts';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+import Home from './pages/Home/Home';
+import Products from './pages/Products/SearchBar';
+import Cart from './pages/Cart/Cart';
 
 function App() {
   return (
-    <Router>
+    <>
+      <Navbar />
       <Routes>
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<ManageUsers />} />
-        <Route path="/admin/products" element={<ManageProducts />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
-    </Router>
+      <Footer />
+    </>
   );
 }
 
