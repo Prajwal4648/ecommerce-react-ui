@@ -1,17 +1,40 @@
+// src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Admin Pages
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import ManageUsers from './pages/Admin/ManageUsers';
 import ManageProducts from './pages/Admin/ManageProducts';
 
+// Cart & Order Components
+import Cart from './pages/Cart/Cart'; // formerly CartPage
+import Checkout from './pages/Cart/Checkout'; // formerly CheckoutForm
+import OrderSummary from './pages/Cart/OrderSummary';
+import CartTempProduct from './pages/Cart/CartTempProduct'; // temp test page
+
+// Cart Context
+import { CartProvider } from './pages/Cart/CartContext';
+
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<ManageUsers />} />
-        <Route path="/admin/products" element={<ManageProducts />} />
-      </Routes>
-    </Router>
+    <CartProvider>
+      <Router>
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<ManageUsers />} />
+          <Route path="/admin/products" element={<ManageProducts />} />
+
+          {/* Cart Flow Routes */}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-summary" element={<OrderSummary />} />
+
+          {/* Temporary test route to add products manually */}
+          <Route path="/test-products" element={<CartTempProduct />} />
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }
 
