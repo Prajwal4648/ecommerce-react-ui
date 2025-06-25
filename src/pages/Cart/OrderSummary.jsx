@@ -1,6 +1,8 @@
 
 import React, { useEffect } from 'react';
 import { useCart } from './CartContext';
+import './OrderSummary.css';
+
 
 const OrderSummary = () => {
   const { cartItems, clearCart } = useCart();

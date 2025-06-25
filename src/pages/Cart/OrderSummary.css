@@ -1,0 +1,37 @@
+.order-summary {
+  flex: 1;
+  flex-direction: column;
+  background: #fafafa;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  height: fit-content;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.order-summary h2 {
+  font-size: 22px;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.order-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.order-summary h3 {
+  font-size: 18px;
+  color: #222;
+  margin-top: 1.5rem;
+}
+
+.order-summary h4 {
+  margin-top: 1.5rem;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+}
