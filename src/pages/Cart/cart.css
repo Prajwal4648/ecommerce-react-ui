@@ -44,6 +44,7 @@
 /* Left: Cart Items */
 .cart-items {
   flex: 2;
+  min-width: 300px;
 }
 
 .cart-item {
@@ -55,6 +56,7 @@
   padding: 20px;
   margin: 20px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
 }
 
 .cart-item img {
@@ -68,6 +70,7 @@
 
 .cart-item-details {
   flex: 1;
+  min-width: 200px;
 }
 
 .cart-item-details h4 {
@@ -86,6 +89,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
 }
 
 .quantity-controls button {
@@ -183,11 +187,121 @@
   background-color: #f0f0f0;
 }
 
-/* Responsive */
+/* Empty Cart View */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  min-height: 70vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.empty-cart h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.empty-cart p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.empty-cart-btn {
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.empty-cart-btn:hover {
+  background-color: #333;
+}
+
+/* Promo Code Section */
+.promo-section {
+  margin-top: 20px;
+}
+
+.promo-section p {
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.promo-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.promo-input-wrapper input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.promo-input-wrapper button {
+  padding: 10px 16px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.promo-input-wrapper button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Benefits */
+.features {
+  margin-top: 20px;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Divider */
+.divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* ✅ Responsive Styles */
 @media (max-width: 768px) {
+  
   .cart-container {
-    flex-direction: column;
-    padding: 20px;
+    flex-direction: row;
+    padding: 10px 6px;
+  }
+
+  .cart-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .cart-item img {
+    margin-right: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .quantity-controls {
+    margin-left: 0;
   }
 
   .cart-summary {
