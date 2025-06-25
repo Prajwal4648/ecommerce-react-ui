@@ -198,22 +198,37 @@
 
 /* Empty Cart View */
 .empty-cart {
+
   position: fixed;
+
+  position: fixed;              /* Make it cover full screen */
+
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
+
+  align-items: center;       
+  justify-content: center;     
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;     
+  z-index: 999;                
+  padding: 20px;            
+
   box-sizing: border-box;
   background: white;
   z-index: 10;
 }
+
 
 .empty-cart h2 {
   font-size: 2.2rem;
@@ -440,7 +455,7 @@
   }
 
   .cart-title-row {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 10px;
     width: 100%;
