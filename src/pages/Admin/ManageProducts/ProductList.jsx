@@ -1,4 +1,3 @@
-// src/pages/Admin/ManageProducts/ProductList.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { seedProducts, getProducts, saveProducts } from './productService';

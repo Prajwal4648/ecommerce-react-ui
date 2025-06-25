@@ -1,5 +1,6 @@
+// src/pages/Admin/ManageUsers/UserList.jsx
 import { useEffect, useState } from 'react';
-import { getUsers, saveUsers, seedUsers } from './userService';
+import { getUsers, seedUsers } from './userService';
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -11,12 +12,6 @@ export default function UserList() {
     }
     init();
   }, []);
-
-  const handleDelete = (id) => {
-    const updated = users.filter((u) => u.id !== id);
-    saveUsers(updated);
-    setUsers(updated);
-  };
 
   return (
     <div>
@@ -35,8 +30,9 @@ export default function UserList() {
               <td>{u.email}</td>
               <td>{u.username}</td>
               <td>
-                {/* Edit will be implemented later */}
-                <button onClick={() => handleDelete(u.id)}>Delete</button>
+                {/* Non-functional buttons for now */}
+                <button>Edit</button>{' '}
+                <button>Delete</button>
               </td>
             </tr>
           ))}

@@ -1,4 +1,3 @@
-// src/pages/Admin/ManageProducts/productService.js
 import { fetchAllProducts } from '../../../api/productApi';
 import { KEY_PRODUCTS } from '../../../utils/constants';
 
