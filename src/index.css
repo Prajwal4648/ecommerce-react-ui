@@ -1,3 +1,15 @@
+@import "tailwindcss";
+#root {
+  height: 100%;
+  margin: 0;
+   background-color: #f3f4f6;
+}
+  /*display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -26,6 +38,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -34,7 +47,7 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
+/*
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -66,3 +79,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/
