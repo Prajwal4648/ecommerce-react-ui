@@ -189,17 +189,23 @@
 
 /* Empty Cart View */
 .empty-cart {
+  position: fixed;              /* Make it cover full screen */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 650px;
-  font-family: 'Segoe UI', sans-serif;
+  align-items: center;         /* Horizontal center */
+  justify-content: center;     /* Vertical center */
   text-align: center;
-  min-height: 70vh;
-  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;     /* Optional - hides layout behind */
+  z-index: 999;                /* Keep it above all */
+  padding: 20px;               /* For smaller screens */
   box-sizing: border-box;
 }
+
 
 .empty-cart h2 {
   font-size: 2.2rem;
