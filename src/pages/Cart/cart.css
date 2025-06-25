@@ -200,7 +200,11 @@
 .empty-cart {
 
 
+
   position: fixed;
+
+  position: fixed;              /* Make it cover full screen */
+
 
   position: fixed;              /* Make it cover full screen */
 
@@ -213,6 +217,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+
 
 
   align-items: center;
@@ -233,6 +238,11 @@
   align-items: center;         /* Horizontal center */
   justify-content: center;     /* Vertical center */
   text-align: center;
+
+  align-items: center;         /* Horizontal center */
+  justify-content: center;     /* Vertical center */
+  text-align: center;
+
   font-family: 'Segoe UI', sans-serif;
   background-color: white;     /* Optional - hides layout behind */
   z-index: 999;                /* Keep it above all */
