@@ -1,3 +1,4 @@
+// ProductList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -5,7 +6,6 @@ import Search from "./SearchBar";
 import Filter from "./Filters";
 import "./ProductList.css";
 
-// Helper to capitalize category names
 const capitalize = (text) => {
   if (text === "men's clothing") return "Men's clothing";
   if (text === "women's clothing") return "Women's clothing";
@@ -14,7 +14,6 @@ const capitalize = (text) => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
-// Helper to add dummy sizes
 const assignSizes = (product) => {
   const allSizes = [
     "XS",
@@ -43,6 +42,8 @@ const ProductList = () => {
   const [sortOption, setSortOption] = useState("name");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(500);
 
   useEffect(() => {
     axios
@@ -58,26 +59,20 @@ const ProductList = () => {
     const matchesSearch = (product.title + " " + product.category)
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-
     const matchesCategory =
       selectedCategories.length === 0 ||
       selectedCategories.includes(capitalize(product.category));
-
     const matchesSize =
       selectedSizes.length === 0 ||
       product.sizes?.some((size) => selectedSizes.includes(size));
-
-    return matchesSearch && matchesCategory && matchesSize;
+    const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+    return matchesSearch && matchesCategory && matchesSize && matchesPrice;
   });
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortOption === "name") {
-      return a.title.localeCompare(b.title);
-    } else if (sortOption === "price-low") {
-      return a.price - b.price;
-    } else if (sortOption === "price-high") {
-      return b.price - a.price;
-    }
+    if (sortOption === "name") return a.title.localeCompare(b.title);
+    if (sortOption === "price-low") return a.price - b.price;
+    if (sortOption === "price-high") return b.price - a.price;
     return 0;
   });
 
@@ -88,6 +83,8 @@ const ProductList = () => {
         <Filter
           onCategoryChange={setSelectedCategories}
           onSizeChange={setSelectedSizes}
+          onMinPriceChange={setMinPrice}
+          onMaxPriceChange={setMaxPrice}
         />
       </div>
 
@@ -101,7 +98,7 @@ const ProductList = () => {
             </span>
           </div>
           <div className="sort-section">
-            <label htmlFor="sort">Sort by:</label>
+            <label>Sort by:</label>
             <select
               id="sort"
               value={sortOption}

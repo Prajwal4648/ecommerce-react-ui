@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./Filters.css";
 
-const Filter = ({ onCategoryChange, onSizeChange }) => {
+const Filter = ({
+  onCategoryChange,
+  onSizeChange,
+  onMinPriceChange,
+  onMaxPriceChange,
+}) => {
   const categories = [
     "Electronics",
     "Jewelery",
@@ -26,6 +31,8 @@ const Filter = ({ onCategoryChange, onSizeChange }) => {
 
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [minPriceInput, setMinPriceInput] = useState(0);
+  const [maxPriceInput, setMaxPriceInput] = useState(500);
 
   const handleCategoryChange = (category, isChecked) => {
     const updated = isChecked
@@ -43,11 +50,27 @@ const Filter = ({ onCategoryChange, onSizeChange }) => {
     onSizeChange(updated);
   };
 
+  const handleMinPriceChange = (e) => {
+    const value = Number(e.target.value);
+    setMinPriceInput(value);
+    onMinPriceChange(value);
+  };
+
+  const handleMaxPriceChange = (e) => {
+    const value = Number(e.target.value);
+    setMaxPriceInput(value);
+    onMaxPriceChange(value);
+  };
+
   const clearFilters = () => {
     setSelectedCategories([]);
     setSelectedSizes([]);
+    setMinPriceInput(0);
+    setMaxPriceInput(500);
     onCategoryChange([]);
     onSizeChange([]);
+    onMinPriceChange(0);
+    onMaxPriceChange(500);
   };
 
   return (
@@ -85,6 +108,27 @@ const Filter = ({ onCategoryChange, onSizeChange }) => {
               <label htmlFor={`size-${size}`}>{size}</label>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="filter-section">
+        <h3>Price Range</h3>
+        <div className="price-range">
+          <input
+            type="number"
+            placeholder="0"
+            min="0"
+            value={minPriceInput}
+            onChange={handleMinPriceChange}
+          />
+          <span>-</span>
+          <input
+            type="number"
+            placeholder="500"
+            min="0"
+            value={maxPriceInput}
+            onChange={handleMaxPriceChange}
+          />
         </div>
       </div>
 

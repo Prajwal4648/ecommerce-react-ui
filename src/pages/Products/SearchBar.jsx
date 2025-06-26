@@ -4,7 +4,7 @@ import "./SearchBar.css";
 const Search = ({ onSearchChange }) => {
   return (
     <div className="search-box">
-      <label htmlFor="search">
+      <label>
         <strong>Search</strong>
       </label>
       <input
