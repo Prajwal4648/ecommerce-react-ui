@@ -14,7 +14,7 @@
 .filter-panel h2 {
   margin-bottom: 1.5rem;
   color: #212529;
-  font-size: 29px; /* Increased from 20px */
+  font-size: 25px; /* Increased from 20px */
 }
 
 .filter-section {
@@ -24,7 +24,7 @@
 .filter-section h3 {
   margin-bottom: 1rem;
   color: #111;
-  font-size: 25px; /* Increased from 16px */
+  font-size: 20px; /* Increased from 16px */
   font-weight: 600;
 }
 
