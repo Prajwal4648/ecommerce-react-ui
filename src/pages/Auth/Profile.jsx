@@ -11,15 +11,19 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('registeredUser')) || {};
-    setFormData({
-      fullName: storedUser.fullName || '',
-      email: storedUser.email || '',
-      phone: storedUser.phone || '',
-      address: storedUser.address || '',
-      city: storedUser.city || '',
-      zip: storedUser.zip || '',
-    });
+  
+    fetch('https://fakestoreapi.com/users/1')
+      .then((res) => res.json())
+      .then((data) => {
+        setFormData({
+          fullName: `${data.name.firstname} ${data.name.lastname}`,
+          email: data.email,
+          phone: data.phone,
+          address: data.address.street,
+          city: data.address.city,
+          zip: data.address.zipcode,
+        });
+      });
   }, []);
 
   const handleChange = (e) => {
@@ -31,14 +35,11 @@ const Profile = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    const updatedUser = { ...JSON.parse(localStorage.getItem('registeredUser')), ...formData };
-    localStorage.setItem('registeredUser', JSON.stringify(updatedUser));
-    alert('Profile updated successfully!');
+    alert('User Updated!');
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-10 ">
-      {/* Add border and border-gray-300 classes here */}
+    <div className="min-h-screen bg-gray-100 px-4 py-10">
       <div className="max-w-screen-xl w-full mx-auto bg-white rounded-xl shadow p-10 border border-gray-300">
         <h2 className="text-3xl font-bold mb-8">Profile Information</h2>
         <form onSubmit={handleUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -58,7 +59,7 @@ const Profile = () => {
               type="email"
               name="email"
               value={formData.email}
-              disabled 
+              disabled
               className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-gray-100"
             />
           </div>
@@ -69,7 +70,6 @@ const Profile = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="+1 (555) 123-4567"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
             />
           </div>
@@ -80,7 +80,6 @@ const Profile = () => {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              placeholder="123 Main St"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
             />
           </div>
@@ -91,7 +90,6 @@ const Profile = () => {
               name="city"
               value={formData.city}
               onChange={handleChange}
-              placeholder="New York"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
             />
           </div>
@@ -102,7 +100,6 @@ const Profile = () => {
               name="zip"
               value={formData.zip}
               onChange={handleChange}
-              placeholder="10001"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
             />
           </div>

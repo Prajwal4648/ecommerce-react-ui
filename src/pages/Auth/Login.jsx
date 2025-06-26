@@ -4,24 +4,34 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const enteredEmail = form.email.value;
-    const enteredPassword = form.password.value;
+    const username = e.target.username.value;
+    const password = e.target.password.value;
 
-    const storedUser = JSON.parse(localStorage.getItem('registeredUser'));
+    try {
+      const response = await fetch('https://fakestoreapi.com/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (
-      storedUser &&
-      storedUser.email === enteredEmail &&
-      storedUser.password === enteredPassword
-    ) {
-      alert('Login successful!');
-      navigate('/home'); 
-    } else {
-      alert('Invalid email or password');
+      const data = await response.json();
+
+      if (data.token) {
+        
+        localStorage.setItem('token', data.token);
+        alert('Login successful!');
+        navigate('/home');
+      } else {
+        alert('Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Try again.');
+      console.error(error);
     }
   };
 
@@ -31,23 +41,17 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-[600px] bg-gray p-10 rounded-xl ">
+      <div className="w-[600px] bg-white p-10 rounded-xl shadow-xl">
         <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
         <p className="text-center text-gray-500 mb-6">Sign in to your account</p>
 
-        <div className="flex items-center my-4">
-          <hr className="flex-grow border-gray-300" />
-         
-          <hr className="flex-grow border-gray-300" />
-        </div>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Email address</label>
+            <label className="block text-sm font-medium mb-1">Username</label>
             <input
-              name="email" 
-              type="email"
-              placeholder="you@example.com"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
               required
             />
@@ -56,7 +60,7 @@ const Login = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Password</label>
             <input
-              name="password" 
+              name="password"
               type="password"
               placeholder="••••••••"
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"

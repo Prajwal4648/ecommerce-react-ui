@@ -4,31 +4,56 @@ import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.target;
-    const user = {
-      userId: form.userId.value,
-      username: form.username.value,
-      fullName: form.fullName.value,
-      email: form.email.value,
-      password: form.password.value,
-      confirmPassword: form.confirmPassword.value,
-      phone: form.phone.value,
-      address: form.address.value,
-    };
 
-    if (user.password !== user.confirmPassword) {
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+
+    if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
     }
 
-    
-    localStorage.setItem('registeredUser', JSON.stringify(user));
+    const newUser = {
+      email: form.email.value,
+      username: form.username.value,
+      password: password,
+      name: {
+        firstname: form.fullName.value.split(" ")[0] || "",
+        lastname: form.fullName.value.split(" ")[1] || "",
+      },
+      address: {
+        city: "Sample City", 
+        street: form.address.value,
+        number: parseInt(form.userId.value) || 1,
+        zipcode: "000000",
+        geolocation: {
+          lat: "0",
+          long: "0",
+        },
+      },
+      phone: form.phone.value,
+    };
 
-    alert('Account created successfully!');
-    navigate('/'); 
+    try {
+      const response = await fetch("https://fakestoreapi.com/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
+      });
+
+      const result = await response.json();
+      console.log("User registered:", result);
+
+      alert("Account created successfully!");
+      navigate("/");
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   const goToLogin = () => {
@@ -37,7 +62,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-[600px] bg-gray p-10 rounded-xl ">
+      <div className="w-[600px] bg-white p-10 rounded-xl shadow-xl">
         <h1 className="text-3xl font-bold text-center mb-2">Create Account</h1>
         <p className="text-center text-gray-500 mb-6">Start your journey with us</p>
 
@@ -57,7 +82,7 @@ const Register = () => {
             <input
               type="text"
               name="userId"
-              placeholder="Enter your User ID"
+              placeholder="Enter a user ID"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
             />
@@ -79,7 +104,7 @@ const Register = () => {
             <input
               type="text"
               name="fullName"
-              placeholder="Enter your full name"
+              placeholder="First Last"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
             />
@@ -134,7 +159,7 @@ const Register = () => {
             <input
               type="text"
               name="address"
-              placeholder="Enter your address"
+              placeholder="Street address"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
             />
