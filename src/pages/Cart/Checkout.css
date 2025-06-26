@@ -1,57 +1,92 @@
-.checkout-form {
-  max-width: 500px;
-  margin: 2rem auto;
+/* Wrapper around the page */
+.checkout-page {
+  width: 100vw;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
   padding: 2rem;
-  background-color: #fefefe;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.checkout-form h2 {
-  font-size: 24px;
-  margin-bottom: 1rem;
+/* Only the title on top */
+.checkout-title {
+  font-size: 2rem;
+  font-weight: bold;
   color: #111;
-  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.checkout-form form {
+/* Main container for form + summary */
+.checkout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Left side: form */
+.checkout-form {
+  flex: 2;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
-.checkout-form input,
-.checkout-form textarea {
-  padding: 10px 14px;
+.form-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.form-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+input:not([type='checkbox']), select {
+  width: 100%;
+  padding: 0.75rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
-.checkout-form input:focus,
-.checkout-form textarea:focus {
-  border-color: #007bff;
+.row {
+  display: flex;
+  gap: 1rem;
 }
 
-.checkout-form textarea {
-  resize: vertical;
-  min-height: 100px;
+.billing-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
 }
 
-.checkout-form button {
-  background-color: #111;
-  color: #fff;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
+.billing-checkbox input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: #111;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.checkout-form button:hover {
-  background-color: #333;
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+
+  .order-summary {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .row {
+    flex-direction: column;
+  }
 }
