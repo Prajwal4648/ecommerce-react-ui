@@ -4,14 +4,43 @@ import './cart.css';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { 
+    cartItems, 
+    removeFromCart, 
+    updateQuantity, 
+    clearCart,
+    discount,
+    isPromoApplied,
+    applyPromo
+  } = useCart();
   const navigate = useNavigate();
   const [promoCode, setPromoCode] = useState('');
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 100 ? 0 : 10;
   const tax = 14.40; // fixed or calculated
-  const total = subtotal + shipping + tax;
+  const total = subtotal + shipping + tax - discount;
+
+  // Handle promo code application
+  const handlePromoCode = () => {
+    if (promoCode.toUpperCase() === 'FLAT10' && !isPromoApplied) {
+      const discountAmount = (subtotal + shipping + tax) * 0.10;
+      applyPromo(discountAmount);
+    } else if (promoCode.toUpperCase() !== 'FLAT10') {
+      alert('Invalid promo code');
+    } else if (isPromoApplied) {
+      alert('Promo code already applied');
+    }
+  };
+
+  // Handle quantity decrease with removal when quantity reaches 0
+  const handleQuantityDecrease = (itemId, currentQuantity) => {
+    if (currentQuantity <= 1) {
+      removeFromCart(itemId);
+    } else {
+      updateQuantity(itemId, currentQuantity - 1);
+    }
+  };
 
   // Empty cart view
   if (cartItems.length === 0) {
@@ -45,7 +74,7 @@ const Cart = () => {
               <p>₹{item.price}</p>
             </div>
             <div className="quantity-controls">
-              <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+              <button onClick={() => handleQuantityDecrease(item.id, item.quantity)}>-</button>
               <span>{item.quantity}</span>
               <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
             </div>
@@ -60,6 +89,9 @@ const Cart = () => {
         <p>Subtotal ({cartItems.length} items) <span>₹{subtotal.toFixed(2)}</span></p>
         <p>Shipping <span>{shipping === 0 ? 'Free' : `₹${shipping.toFixed(2)}`}</span></p>
         <p>Tax <span>₹{tax.toFixed(2)}</span></p>
+        {isPromoApplied && (
+          <p style={{color: 'green'}}>Discount (FLAT10) <span>-₹{discount.toFixed(2)}</span></p>
+        )}
         <hr />
         <p className="total">Total <span>₹{total.toFixed(2)}</span></p>
 
@@ -77,8 +109,18 @@ const Cart = () => {
               placeholder="Enter code"
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
+              disabled={isPromoApplied}
             />
-            <button>Apply</button>
+            <button 
+              onClick={handlePromoCode}
+              disabled={isPromoApplied}
+              style={{
+                backgroundColor: isPromoApplied ? '#ccc' : '',
+                cursor: isPromoApplied ? 'not-allowed' : 'pointer'
+              }}
+            >
+              {isPromoApplied ? 'Applied' : 'Apply'}
+            </button>
           </div>
         </div>
 

@@ -1,23 +1,41 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-
 // Create the context
 const CartContext = createContext();
 
 // Create a provider component
 export const CartProvider = ({ children }) => {
-
-    
   // Initialize cartItems from localStorage (if available)
   const [cartItems, setCartItems] = useState(() => {
     const stored = localStorage.getItem('cart');
     return stored ? JSON.parse(stored) : [];
   });
 
+  // Initialize promo code state from localStorage
+  const [discount, setDiscount] = useState(() => {
+    const stored = localStorage.getItem('discount');
+    return stored ? parseFloat(stored) : 0;
+  });
+
+  const [isPromoApplied, setIsPromoApplied] = useState(() => {
+    const stored = localStorage.getItem('isPromoApplied');
+    return stored ? JSON.parse(stored) : false;
+  });
+
   // Save cartItems to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
+
+  // Save discount to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('discount', discount.toString());
+  }, [discount]);
+
+  // Save promo applied status to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('isPromoApplied', JSON.stringify(isPromoApplied));
+  }, [isPromoApplied]);
 
   // Add item to cart
   const addToCart = (product) => {
@@ -49,19 +67,39 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // Clear all cart items
+  // Clear all cart items and promo code
   const clearCart = () => {
     setCartItems([]);
+    setDiscount(0);
+    setIsPromoApplied(false);
     localStorage.removeItem('cart');
+    localStorage.removeItem('discount');
+    localStorage.removeItem('isPromoApplied');
+  };
+
+  // Apply promo code
+  const applyPromo = (discountAmount) => {
+    setDiscount(discountAmount);
+    setIsPromoApplied(true);
+  };
+
+  // Remove promo code
+  const removePromo = () => {
+    setDiscount(0);
+    setIsPromoApplied(false);
   };
 
   return (
     <CartContext.Provider value={{
       cartItems,
+      discount,
+      isPromoApplied,
       addToCart,
       removeFromCart,
       updateQuantity,
-      clearCart
+      clearCart,
+      applyPromo,
+      removePromo
     }}>
       {children}
     </CartContext.Provider>

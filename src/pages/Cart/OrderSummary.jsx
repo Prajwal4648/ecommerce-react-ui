@@ -3,12 +3,12 @@ import { useCart } from './CartContext';
 import './OrderSummary.css';
 
 const OrderSummary = () => {
-  const { cartItems } = useCart();
+  const { cartItems, discount, isPromoApplied } = useCart();
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 100 ? 0 : 10;
-  const tax = +(subtotal * 0.08).toFixed(2); // 8% tax as an example
-  const total = subtotal + shipping + tax;
+  const tax = 14.40; // 8% tax as an example
+  const total = subtotal + shipping + tax - discount;
 
   return (
     <div className="order-summary">
@@ -23,29 +23,34 @@ const OrderSummary = () => {
               <p className="product-details">Size: S • Color: White</p>
               <p className="product-qty">Qty: {item.quantity}</p>
             </div>
-            <p className="product-price">${(item.price * item.quantity).toFixed(2)}</p>
+            <p className="product-price">₹{(item.price * item.quantity).toFixed(2)}</p>
           </div>
         ))}
       </div>
 
       <div className="price-breakdown">
         <p>
-          Subtotal <span>${subtotal.toFixed(2)}</span>
+          Subtotal <span>₹{subtotal.toFixed(2)}</span>
         </p>
         <p>
-          Shipping <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+          Shipping <span>{shipping === 0 ? 'Free' : `₹${shipping.toFixed(2)}`}</span>
         </p>
         <p>
-          Tax <span>${tax.toFixed(2)}</span>
+          Tax <span>₹{tax.toFixed(2)}</span>
         </p>
+        {isPromoApplied && (
+          <p style={{color: 'green'}}>
+            Discount (FLAT10) <span>-₹{discount.toFixed(2)}</span>
+          </p>
+        )}
         <hr />
         <p className="total">
-          Total <span>${total.toFixed(2)}</span>
+          Total <span>₹{total.toFixed(2)}</span>
         </p>
       </div>
 
       <button className="complete-order-btn">
-        Complete Order • ${total.toFixed(2)}
+        Complete Order • ₹{total.toFixed(2)}
       </button>
 
       <div className="order-notes">

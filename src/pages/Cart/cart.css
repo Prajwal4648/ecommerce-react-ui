@@ -313,6 +313,7 @@
   cursor: pointer;
   font-weight: 500;
   white-space: nowrap;
+  height: 100%;
 }
 
 .promo-input-wrapper button:hover {
