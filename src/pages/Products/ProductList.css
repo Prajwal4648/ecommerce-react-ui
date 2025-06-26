@@ -136,13 +136,7 @@
   color: #333;
   line-height: 1.4;
   display: -webkit-box;
-<<<<<<< HEAD
-  /* -webkit-line-clamp: 2; */
-=======
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
->>>>>>> 4898a8c52f293ab0f1d3023f9d5393054d5ac75c
-  -webkit-box-orient: vertical;
+
   overflow: hidden;
 }
 
