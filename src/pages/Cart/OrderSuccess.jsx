@@ -1,17 +1,26 @@
-import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import './OrderSuccess.css';
+// Top of your component
 
 const OrderSuccess = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const orderDetails = location.state?.orderData;
 
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+    useEffect(() => {
   if (!orderDetails) {
     // If no order data, redirect to homepage
     navigate('/');
     return null;
   }
+},[orderDetails, navigate]);
+
+if (!orderDetails) return null;
 
   const handleContinueShopping = () => {
     navigate('/');
@@ -26,12 +35,15 @@ const OrderSuccess = () => {
       <div className="success-container">
         {/* ✅ Success Header */}
         <div className="success-header">
-          <div className="success-icon">✅</div>
+          <div className="success-icon">
+  <span className="checkmark">✔</span>
+</div>
           <h1 className="success-title">Order Placed Successfully!</h1>
           <p className="success-subtitle">
             Thank you for your order. We've received it and will process it soon.
           </p>
         </div>
+
 
         {/* 📦 Order Details */}
         <div className="order-details-card">

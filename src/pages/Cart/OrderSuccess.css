@@ -1,6 +1,6 @@
 /* Page wrapper matching checkout design */
 .order-success-page {
-  width: 100vw;
+  width: 99vw;
   box-sizing: border-box;
   background-color: #f9f9f9;
   padding: 3rem;
@@ -28,10 +28,53 @@
 }
 
 .success-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  animation: bounce 0.6s ease-in-out;
+  background-color: black;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
 }
+
+.checkmark {
+  color: white;
+  font-size: 2.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transform: scale(0);
+  animation: scaleUp 0.5s 0.3s ease-out forwards; /* delay to wait for outer box */
+  opacity: 0;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 .success-title {
   font-size: 2.5rem;
@@ -46,6 +89,8 @@
   margin: 0;
   line-height: 1.5;
 }
+
+
 
 /* Order Details Card */
 .order-details-card {
@@ -188,8 +233,8 @@
 
 /* Next Steps Card */
 .next-steps-card {
-  background: #fffbe6;
-  border: 1px solid #ffdf91;
+  background: #dadada;
+  border: 2px solid #bababa;
   padding: 1.5rem;
   border-radius: 10px;
 }
