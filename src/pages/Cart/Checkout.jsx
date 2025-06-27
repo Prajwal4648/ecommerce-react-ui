@@ -5,6 +5,33 @@ import './Checkout.css';
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('card'); // 'card' or 'cod'
 
+  // Form data state
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    apartment: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+    nameOnCard: '',
+    billingAddressSame: true
+  });
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
   return (
     <div className="checkout-page">
       <h2 className="checkout-title">Checkout</h2>
@@ -14,27 +41,87 @@ const Checkout = () => {
           <div className="form-section">
             <h3>Contact Information</h3>
             <div className="row">
-              <input type="text" placeholder="First Name" />
-              <input type="text" placeholder="Last Name" />
+              <input 
+                type="text" 
+                name="firstName"
+                placeholder="First Name" 
+                value={formData.firstName}
+                onChange={handleInputChange}
+                required
+              />
+              <input 
+                type="text" 
+                name="lastName"
+                placeholder="Last Name" 
+                value={formData.lastName}
+                onChange={handleInputChange}
+                required
+              />
             </div>
-            <input type="email" placeholder="Email" />
-            <input type="tel" placeholder="Phone" />
+            <input 
+              type="email" 
+              name="email"
+              placeholder="Email" 
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+            <input 
+              type="tel" 
+              name="phone"
+              placeholder="Phone" 
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="form-section">
             <h3>Shipping Address</h3>
-            <input type="text" placeholder="Address" />
-            <input type="text" placeholder="Apartment, suite, etc. (optional)" />
+            <input 
+              type="text" 
+              name="address"
+              placeholder="Address" 
+              value={formData.address}
+              onChange={handleInputChange}
+              required
+            />
+            <input 
+              type="text" 
+              name="apartment"
+              placeholder="Apartment, suite, etc. (optional)" 
+              value={formData.apartment}
+              onChange={handleInputChange}
+            />
             <div className="row">
-              <input type="text" placeholder="City" />
-              <select>
-                <option>Select state</option>
-                <option>Karnataka</option>
-                <option>Maharashtra</option>
-                <option>Tamil Nadu</option>
+              <input 
+                type="text" 
+                name="city"
+                placeholder="City" 
+                value={formData.city}
+                onChange={handleInputChange}
+                required
+              />
+              <select 
+                name="state"
+                value={formData.state}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select state</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
               </select>
             </div>
-            <input type="text" placeholder="ZIP Code" />
+            <input 
+              type="text" 
+              name="zipCode"
+              placeholder="ZIP Code" 
+              value={formData.zipCode}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
           <div className="form-section">
@@ -68,14 +155,47 @@ const Checkout = () => {
             {/* Card Payment Fields - Only show when card is selected */}
             {paymentMethod === 'card' && (
               <div className="card-payment-fields">
-                <input type="text" placeholder="Card Number" required />
+                <input 
+                  type="text" 
+                  name="cardNumber"
+                  placeholder="Card Number" 
+                  value={formData.cardNumber}
+                  onChange={handleInputChange}
+                  required 
+                />
                 <div className="row">
-                  <input type="text" placeholder="MM/YY" required />
-                  <input type="text" placeholder="CVV" required />
+                  <input 
+                    type="text" 
+                    name="expiryDate"
+                    placeholder="MM/YY" 
+                    value={formData.expiryDate}
+                    onChange={handleInputChange}
+                    required 
+                  />
+                  <input 
+                    type="text" 
+                    name="cvv"
+                    placeholder="CVV" 
+                    value={formData.cvv}
+                    onChange={handleInputChange}
+                    required 
+                  />
                 </div>
-                <input type="text" placeholder="Name on Card" required />
+                <input 
+                  type="text" 
+                  name="nameOnCard"
+                  placeholder="Name on Card" 
+                  value={formData.nameOnCard}
+                  onChange={handleInputChange}
+                  required 
+                />
                 <label className="billing-checkbox">
-                  <input type="checkbox" defaultChecked />
+                  <input 
+                    type="checkbox" 
+                    name="billingAddressSame"
+                    checked={formData.billingAddressSame}
+                    onChange={handleInputChange}
+                  />
                   Billing address same as shipping
                 </label>
               </div>
@@ -98,7 +218,8 @@ const Checkout = () => {
           </div>
         </div>
 
-        <OrderSummary />
+        {/* Pass formData and paymentMethod to OrderSummary */}
+        <OrderSummary formData={formData} paymentMethod={paymentMethod} />
       </div>
     </div>
   );
