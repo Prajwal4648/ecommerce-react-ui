@@ -1,60 +1,66 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Box,
-  Grid,
   Typography,
   Card,
   CardMedia,
   CardContent,
   CircularProgress,
-  Button
-} from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+  Button,
+  Container,
+  Fade,
+} from "@mui/material";
+import { Masonry } from "@mui/lab";
+import { useNavigate } from "react-router-dom";
+import HeroSection from "../../components/HeroSection";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [newCollection, setNewCollection] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [bannerImage, setBannerImage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=12')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data.slice(0, 8));
-        setNewCollection(data.slice(8));
-        setBannerImage(data[0]?.image);
+    fetch("https://fakestoreapi.com/products?limit=12")
+      .then((res) => res.json())
+      .then((data) => {
+        const slimFitIndex = data.findIndex((p) =>
+          p.title.toLowerCase().includes("mens casual slim fit")
+        );
+        const slimFitProduct = data.splice(slimFitIndex, 1)[0];
+        const reordered = [slimFitProduct, ...data];
+        setProducts(reordered.slice(0, 8));
+        setNewCollection(reordered.slice(8));
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
-  const ProductCard = ({ product }) => (
-    <Grid item xs={12} sm={6} md={3}>
+  const ProductCard = ({ product, index }) => (
+    <Fade in timeout={400 + index * 100}>
       <Card
         sx={{
-          height: '100%',
-          minHeight: 420,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          minHeight: 440,
           borderRadius: 3,
-          boxShadow: 3,
-          transition: '0.3s',
-          '&:hover': {
+          boxShadow: 2,
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          "&:hover": {
             boxShadow: 6,
-            transform: 'translateY(-4px)',
+            transform: "translateY(-4px)",
           },
         }}
       >
-        {/* Image */}
+        {/* Image section */}
         <Box
           sx={{
             height: 200,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            bgcolor: "#fafafa",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             p: 2,
           }}
         >
@@ -63,53 +69,65 @@ export default function Home() {
             image={product.image}
             alt={product.title}
             sx={{
-              maxHeight: '100%',
-              maxWidth: '100%',
-              objectFit: 'contain',
-              transition: 'transform 0.3s',
-              '&:hover': {
-                transform: 'scale(1.05)',
-              },
+              maxHeight: "100%",
+              maxWidth: "100%",
+              objectFit: "contain",
             }}
           />
         </Box>
 
-        {/* Title & Price */}
-        <CardContent sx={{ flex: 1 }}>
+        {/* Text section */}
+        <CardContent
+          sx={{
+            textAlign: "center",
+            px: 2,
+            minHeight: 120,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ fontStyle: "italic", mb: 0.5 }}
+          >
+            {product.category}
+          </Typography>
           <Typography
             variant="subtitle1"
             fontWeight={600}
-            gutterBottom
             sx={{
-              display: '-webkit-box',
-              WebkitBoxOrient: 'vertical',
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              height: 48,
-              textAlign: 'center',
+              mb: 1,
             }}
           >
             {product.title}
           </Typography>
-          <Typography
-            textAlign="center"
-            color="text.secondary"
-            fontWeight={500}
-          >
+          <Typography variant="h6" fontWeight={700} color="primary">
             ${product.price.toFixed(2)}
           </Typography>
         </CardContent>
 
         {/* Button */}
-        <Box sx={{ textAlign: 'center', p: 2 }}>
+        <Box sx={{ px: 2, pb: 2 }}>
           <Button
-            variant="contained"
             fullWidth
             sx={{
-              borderRadius: '20px',
-              textTransform: 'uppercase',
+              borderRadius: "50px",
               fontWeight: 600,
+              textTransform: "uppercase",
+              py: 1,
+              fontSize: "0.9rem",
+              background: "linear-gradient(to right, #1976d2, #42a5f5)",
+              color: "#fff",
+              "&:hover": {
+                background: "linear-gradient(to right, #1565c0, #1e88e5)",
+              },
             }}
             onClick={() => navigate(`/products/${product.id}`)}
           >
@@ -117,86 +135,69 @@ export default function Home() {
           </Button>
         </Box>
       </Card>
-    </Grid>
+    </Fade>
   );
 
   return (
     <>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          height: { xs: '60vh', md: '75vh' },
-          backgroundImage: `url(${bannerImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative',
-          color: 'white',
-          textAlign: 'center',
-          mb: 6,
-        }}
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            top: 0,
-            left: 0,
-            zIndex: 1,
-          }}
-        />
-        <Box sx={{ position: 'relative', zIndex: 2 }}>
-          <Typography variant="h3" fontWeight={700}>
-            TOLUS SPRING COLLECTION
-          </Typography>
-          <Typography variant="subtitle1" mt={2}>
-            Elevate your wardrobe with timeless pieces crafted for the modern individual.
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{ mt: 3, borderRadius: '30px' }}
-            onClick={() => navigate('/products')}
-          >
-            Shop Now
-          </Button>
-        </Box>
-      </Box>
+      <HeroSection />
 
-      {/* Popular Products */}
-      <Box sx={{ px: { xs: 2, md: 6 }, py: 6 }}>
-        <Typography variant="h4" fontWeight={600} textAlign="center" mb={4}>
+      <Container sx={{ py: 6 }}>
+        <Typography variant="h4" fontWeight={700} textAlign="center" mb={1}>
           Popular Products
+        </Typography>
+        <Typography
+          variant="body1"
+          textAlign="center"
+          color="text.secondary"
+          mb={4}
+        >
+          Handpicked items our customers love most.
         </Typography>
 
         {loading ? (
-          <Box display="flex" justifyContent="center" py={4}>
+          <Box display="flex" justifyContent="center" py={5}>
             <CircularProgress />
           </Box>
         ) : (
-          <Grid container spacing={4}>
-            {products.map(product => (
-              <ProductCard key={product.id} product={product} />
+          <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
+            {products.map((product, i) => (
+              <ProductCard key={product.id} product={product} index={i} />
             ))}
-          </Grid>
+          </Masonry>
         )}
-      </Box>
+      </Container>
 
-      {/* New Collection Section */}
-      <Box textAlign="center" mt={10} px={{ xs: 2, md: 6 }}>
-        <Typography variant="h5" fontWeight={600}>NEW COLLECTION</Typography>
-        <Typography variant="body1" color="text.secondary" mt={2} mb={6}>
-          Discover elegance and style with our freshly curated collection.
-        </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          {newCollection.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </Grid>
+      <Box sx={{ background: "#f9f9f9", py: 6 }}>
+        <Container>
+          <Box display="flex" justifyContent="center" mb={1}>
+            <Typography
+              variant="h4"
+              fontWeight={700}
+              sx={{
+                borderBottom: "4px solid #1976d2",
+                pb: 1,
+              }}
+            >
+              New Collection
+            </Typography>
+          </Box>
+
+          <Typography
+            variant="body1"
+            textAlign="center"
+            color="text.secondary"
+            mb={4}
+          >
+            Discover elegance and innovation in our latest arrivals.
+          </Typography>
+
+          <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
+            {newCollection.map((product, i) => (
+              <ProductCard key={product.id} product={product} index={i + 10} />
+            ))}
+          </Masonry>
+        </Container>
       </Box>
     </>
   );

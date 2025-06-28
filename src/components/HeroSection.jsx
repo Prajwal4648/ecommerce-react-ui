@@ -1,5 +1,6 @@
-import { Box, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import heroImg from "../assets/HeroImageBackground.jpg";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -7,40 +8,45 @@ export default function HeroSection() {
   return (
     <Box
       sx={{
-        height: '75vh',
-        background: `url(https://vibrant-react-storefront.lovable.app/static/media/hero2.f11d8bc8363ffb29538c.png) center/cover`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        color: 'white',
+        height: "75vh",
+        backgroundImage: `url(${heroImg})`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
         px: 2,
+        color: "white",
       }}
     >
-      {/* Optional overlay for better readability */}
       <Box
         sx={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.35)',
-          top: 0,
-          left: 0,
+          position: "absolute",
+          inset: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.35)",
           zIndex: 1,
         }}
       />
-      <Box sx={{ textAlign: 'center', zIndex: 2 }}>
+      <Box sx={{ textAlign: "center", zIndex: 2, maxWidth: 700, px: 2 }}>
         <Typography variant="h3" fontWeight={700} gutterBottom>
           TOLUS SPRING COLLECTION
         </Typography>
-        <Typography variant="subtitle1" sx={{ mb: 4 }}>
-          Elevate your wardrobe with timeless pieces crafted for the modern individual.
+        <Typography variant="h6" sx={{ mb: 4 }}>
+          Elevate your wardrobe with timeless pieces crafted for the modern
+          individual.
         </Typography>
         <Button
           variant="contained"
           size="large"
-          sx={{ borderRadius: '30px', bgcolor: 'white', color: 'black', ':hover': { bgcolor: '#f5f5f5' } }}
-          onClick={() => navigate('/products')}
+          sx={{
+            borderRadius: "30px",
+            bgcolor: "white",
+            color: "black",
+            px: 4,
+            py: 1.2,
+            fontWeight: 600,
+            "&:hover": { bgcolor: "#f5f5f5" },
+          }}
+          onClick={() => navigate("/products")}
         >
           Buy Now
         </Button>
