@@ -162,3 +162,142 @@ input:not([type='checkbox']), select {
   margin-bottom: 0.5rem;
   color: #555;
 }
+
+/* Tablet (≤991px) */
+@media (max-width: 991px) {
+  .checkout-page {
+    padding: 2rem 2rem;
+  }
+
+  .checkout-title {
+    font-size: 1.8rem;
+  }
+
+  .checkout-container {
+    gap: 2rem;
+  }
+
+  .form-section h3 {
+    font-size: 1.3rem;
+  }
+
+  input:not([type='checkbox']),
+  select {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .checkout-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .checkout-title {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .checkout-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .checkout-form {
+    order: 2;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+
+  input:not([type='checkbox']),
+  select {
+    padding: 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  .payment-option {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+
+  .cod-info {
+    padding: 0.8rem;
+  }
+}
+
+/* Small Devices (≤480px) */
+@media (max-width: 480px) {
+  .checkout-page {
+    padding: 1rem;
+  }
+
+  .checkout-title {
+    font-size: 1.4rem;
+  }
+
+  .form-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .payment-option input[type='radio'],
+  .billing-checkbox input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Extra Small Devices (≤320px) */
+@media (max-width: 320px) {
+  .checkout-page {
+    padding: 0.8rem;
+  }
+
+  .checkout-title {
+    font-size: 1.2rem;
+  }
+
+  .form-section {
+    padding: 0.8rem;
+  }
+}
+
+/* Accessibility & Touch Targets */
+@media (max-width: 768px) {
+  .payment-option,
+  .billing-checkbox,
+  .complete-order-btn {
+    min-height: 44px;
+  }
+
+  input:not([type='checkbox']),
+  select {
+    min-height: 44px;
+  }
+}
+
+/* Focus style */
+input:focus,
+select:focus,
+.payment-option:focus-within,
+.complete-order-btn:focus {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+/* Smooth scroll and fix overflow */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
