@@ -5,13 +5,12 @@ import Login from '../pages/Auth/Login';
 import PrivateRoute from './PrivateRoute';
 
 import AdminLayout from '../pages/Admin/index';
-import DashboardHome from '../pages/Admin/DashboardHome';
+import AdminDashboard from "../pages/Admin/AdminDashboard";
 
 import ProductList from '../pages/Admin/ManageProducts/ProductList';
-import ProductForm from '../pages/Admin/ManageProducts/ProductForm';
+import ProductsComponent from '../pages/Admin/ManageProducts/ProductsComponent'; // Fixed name
 
 import UserList from '../pages/Admin/ManageUsers/UserList';
-// (You can add UserForm later when you implement add/edit)
 
 export default function AppRoutes() {
   return (
@@ -29,13 +28,14 @@ export default function AppRoutes() {
         }
       >
         {/* Dashboard Home */}
-        <Route index element={<DashboardHome />} />
+        <Route index element={<AdminDashboard />} />
 
         {/* Products */}
         <Route path="products">
           <Route index element={<ProductList />} />
-          <Route path="new" element={<ProductForm />} />
-          <Route path=":id/edit" element={<ProductForm />} />
+          {/* Temporarily comment out until ProductForm is created */}
+          {/* <Route path="new" element={<ProductForm />} />
+          <Route path=":id/edit" element={<ProductForm />} /> */}
         </Route>
 
         {/* Users */}
