@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import './OrderSuccess.css';
-// Top of your component
+
 
 const OrderSuccess = () => {
   const location = useLocation();
@@ -14,7 +14,7 @@ const OrderSuccess = () => {
 
     useEffect(() => {
   if (!orderDetails) {
-    // If no order data, redirect to homepage
+
     navigate('/');
     return null;
   }
@@ -33,7 +33,7 @@ if (!orderDetails) return null;
   return (
     <div className="order-success-page">
       <div className="success-container">
-        {/* ✅ Success Header */}
+     
         <div className="success-header">
           <div className="success-icon">
   <span className="checkmark">✔</span>
@@ -45,7 +45,7 @@ if (!orderDetails) return null;
         </div>
 
 
-        {/* 📦 Order Details */}
+        
         <div className="order-details-card">
           <div className="order-info-header">
             <h2>Order Details</h2>
@@ -72,7 +72,7 @@ if (!orderDetails) return null;
           </div>
         </div>
 
-        {/* 🚚 Shipping Address */}
+      
         <div className="shipping-card">
           <h3>📦 Shipping Address</h3>
           <div className="address-details">
@@ -88,7 +88,7 @@ if (!orderDetails) return null;
           </div>
         </div>
 
-        {/* 🛒 Order Items */}
+
         <div className="items-card">
           <h3>🛍️ Order Items</h3>
           <div className="items-list">
@@ -103,7 +103,7 @@ if (!orderDetails) return null;
           </div>
         </div>
 
-        {/* 📋 Next Steps */}
+        
         <div className="next-steps-card">
           <h3>📋 What's Next?</h3>
           <ul className="steps-list">
@@ -114,7 +114,7 @@ if (!orderDetails) return null;
           </ul>
         </div>
 
-        {/* 🔘 Action Buttons */}
+
         <div className="action-buttons">
           <button className="btn-secondary" onClick={handleContinueShopping}>
             🛒 Continue Shopping

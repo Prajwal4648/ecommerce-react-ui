@@ -1,26 +1,25 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Add this import
+import { useNavigate } from 'react-router-dom'; 
 import { useCart } from './CartContext';
 import './OrderSummary.css';
 
 const OrderSummary = ({ formData, paymentMethod }) => {
   const { cartItems, discount, isPromoApplied } = useCart();
-  const navigate = useNavigate(); // Add navigation hook
+  const navigate = useNavigate();
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 100 ? 0 : 10;
-  const tax = 14.40; // 8% tax as an example
+  const tax = 14.40;
   const total = subtotal + shipping + tax - discount;
 
-  // Handle order completion
+
   const handleCompleteOrder = () => {
-    // Basic validation - check if required form data exists
+
     if (!formData || !formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.address || !formData.city || !formData.state || !formData.zipCode) {
       alert('Please fill in all required fields in the checkout form.');
       return;
     }
 
-    // If card payment, validate card fields
     if (paymentMethod === 'card') {
       if (!formData.cardNumber || !formData.expiryDate || !formData.cvv || !formData.nameOnCard) {
         alert('Please fill in all card payment details.');
@@ -28,7 +27,6 @@ const OrderSummary = ({ formData, paymentMethod }) => {
       }
     }
 
-    // Prepare order data to pass to success page
     const orderData = {
       orderNumber: `ORD-${Date.now()}`,
       orderDate: new Date().toLocaleDateString('en-IN', { 
@@ -70,7 +68,7 @@ const OrderSummary = ({ formData, paymentMethod }) => {
       }))
     };
 
-    // Navigate to success page with order data
+  
     navigate('/order-success', { state: { orderData } });
   };
 

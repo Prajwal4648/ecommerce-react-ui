@@ -3,9 +3,9 @@ import OrderSummary from './OrderSummary';
 import './Checkout.css';
 
 const Checkout = () => {
-  const [paymentMethod, setPaymentMethod] = useState('card'); // 'card' or 'cod'
+  const [paymentMethod, setPaymentMethod] = useState('card'); 
 
-  // Form data state
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -23,7 +23,7 @@ const Checkout = () => {
     billingAddressSame: true
   });
 
-  // Handle form input changes
+  
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -127,7 +127,7 @@ const Checkout = () => {
           <div className="form-section">
             <h3>Payment Information</h3>
             
-            {/* Payment Method Selection */}
+            
             <div className="payment-methods">
               <label className="payment-option">
                 <input 
@@ -152,7 +152,7 @@ const Checkout = () => {
               </label>
             </div>
 
-            {/* Card Payment Fields - Only show when card is selected */}
+         
             {paymentMethod === 'card' && (
               <div className="card-payment-fields">
                 <input 
@@ -201,7 +201,7 @@ const Checkout = () => {
               </div>
             )}
 
-            {/* Cash on Delivery Info - Only show when COD is selected */}
+           
             {paymentMethod === 'cod' && (
               <div className="cod-info">
                 <div className="cod-message">
@@ -218,7 +218,7 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Pass formData and paymentMethod to OrderSummary */}
+       
         <OrderSummary formData={formData} paymentMethod={paymentMethod} />
       </div>
     </div>

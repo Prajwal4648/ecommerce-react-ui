@@ -18,10 +18,9 @@ const Cart = () => {
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 100 ? 0 : 10;
-  const tax = 14.40; // fixed or calculated
+  const tax = 14.40; 
   const total = subtotal + shipping + tax - discount;
 
-  // Handle promo code application
   const handlePromoCode = () => {
     if (promoCode.toUpperCase() === 'FLAT10' && !isPromoApplied) {
       const discountAmount = (subtotal + shipping + tax) * 0.10;
@@ -33,7 +32,7 @@ const Cart = () => {
     }
   };
 
-  // Handle quantity decrease with removal when quantity reaches 0
+  
   const handleQuantityDecrease = (itemId, currentQuantity) => {
     if (currentQuantity <= 1) {
       removeFromCart(itemId);
@@ -42,7 +41,6 @@ const Cart = () => {
     }
   };
 
-  // Empty cart view
   if (cartItems.length === 0) {
     return (
       <div className="empty-cart">
@@ -57,13 +55,13 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      {/* Header Row */}
+      
       <div className="cart-title-row">
         <h2>Shopping Cart</h2>
         <button className="clear-cart-btn" onClick={clearCart}>Clear Cart</button>
       </div>
 
-      {/* Left: Cart Items */}
+      
       <div className="cart-items">
         {cartItems.map(item => (
           <div className="cart-item" key={item.id}>
@@ -83,7 +81,6 @@ const Cart = () => {
         ))}
       </div>
 
-      {/* Right: Order Summary */}
       <div className="cart-summary">
         <h3>Order Summary</h3>
         <p>Subtotal ({cartItems.length} items) <span>₹{subtotal.toFixed(2)}</span></p>
@@ -100,7 +97,7 @@ const Cart = () => {
 
         <hr className="divider" />
 
-        {/* Promo Code */}
+     
         <div className="promo-section">
           <p>Promo Code</p>
           <div className="promo-input-wrapper">
@@ -126,7 +123,6 @@ const Cart = () => {
 
         <hr className="divider" />
 
-        {/* Benefits */}
         <div className="features">
           <p>🔒 Secure checkout</p>
           <p>📦 Free shipping over ₹100</p>
