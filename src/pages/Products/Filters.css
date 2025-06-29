@@ -1,20 +1,20 @@
 .filter-panel {
-  width: 280px;
+  width: 100%;
+  max-width: 100%;
   padding: 1.5rem;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   height: fit-content;
-  position: sticky;
-  top: 20px;
   font-family: "Segoe UI", sans-serif;
-  font-size: 20px; /* Increased from 14px to 16px */
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 .filter-panel h2 {
   margin-bottom: 1.5rem;
   color: #212529;
-  font-size: 25px; /* Increased from 20px */
+  font-size: 22px;
 }
 
 .filter-section {
@@ -24,10 +24,11 @@
 .filter-section h3 {
   margin-bottom: 1rem;
   color: #111;
-  font-size: 20px; /* Increased from 16px */
+  font-size: 18px;
   font-weight: 600;
 }
 
+/* Categories & Sizes */
 .filter-options {
   display: flex;
   flex-wrap: wrap;
@@ -38,7 +39,8 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  min-width: 70px;
+  min-width: 80px;
+  white-space: nowrap;
 }
 
 .filter-item input[type="checkbox"] {
@@ -49,7 +51,7 @@
 
 .filter-item label {
   color: #333;
-  font-size: 20px; /* Increased from 14px */
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -58,17 +60,35 @@
   font-weight: 500;
 }
 
+/* Price Range */
+.price-range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.price-range input {
+  width: 80px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/* Clear Button */
 .clear-button {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.75rem;
   border: 1px solid #dee2e6;
   border-radius: 6px;
   background-color: #fff;
   color: #0d1b2a;
   font-weight: 500;
-  font-size: 20px; /* Increased from 14px */
+  font-size: 15px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .clear-button:hover {
@@ -76,17 +96,18 @@
   border-color: #ced4da;
 }
 
-/* Price range section */
-.price-range {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+/* ✅ Mobile optimization */
+@media (max-width: 768px) {
+  .filter-panel {
+    padding: 1rem;
+    font-size: 15px;
+  }
 
-.price-range input {
-  width: 70px;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 20px;
+  .filter-item {
+    min-width: 45%;
+  }
+
+  .filter-section h3 {
+    font-size: 16px;
+  }
 }

@@ -43,8 +43,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Box sx={{ position: 'relative', maxWidth: 250, width: '100%' }}>
-      {/* Search Input Container */}
+    <Box sx={{ position: 'relative', maxWidth: 300, width: '100%' }}>
       <Box
         sx={{
           display: 'flex',
@@ -66,16 +65,13 @@ export default function SearchBar() {
             flex: 1,
             fontSize: '0.9rem',
             height: '100%',
-            px: 0,
             '& input': {
               padding: 0,
               margin: 0,
               height: '100%',
-              lineHeight: '36px', // Match outer container height
+              lineHeight: '36px',
               border: 'none',
               background: 'transparent',
-              borderRadius: 0,
-              boxShadow: 'none',
               outline: 'none',
             },
           }}
@@ -85,13 +81,13 @@ export default function SearchBar() {
         </IconButton>
       </Box>
 
-      {/* Suggestions Dropdown */}
       {suggestions.length > 0 && (
         <Paper
           sx={{
             position: 'absolute',
             top: '100%',
-            zIndex: 10,
+            left: 0,
+            zIndex: 1500,
             width: '100%',
             mt: 0.5,
             maxHeight: 200,
@@ -107,6 +103,7 @@ export default function SearchBar() {
                     setQuery(item.title);
                     setSuggestions([]);
                   }}
+                  sx={{ fontSize: '0.85rem' }}
                 >
                   {item.title}
                 </ListItemButton>

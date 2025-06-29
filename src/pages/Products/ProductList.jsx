@@ -1,146 +1,148 @@
-// ProductList.jsx
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import Search from "./SearchBar";
-import Filter from "./Filters";
-import "./ProductList.css";
-
-const capitalize = (text) => {
-  if (text === "men's clothing") return "Men's clothing";
-  if (text === "women's clothing") return "Women's clothing";
-  if (text === "jewelery") return "Jewelery";
-  if (text === "electronics") return "Electronics";
-  return text.charAt(0).toUpperCase() + text.slice(1);
-};
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
+import Filter from './Filters';
+import './ProductList.css';
+import './SearchBar.css'; // For search box styling
 
 const assignSizes = (product) => {
-  const allSizes = [
-    "XS",
-    "S",
-    "M",
-    "L",
-    "XL",
-    "4Y",
-    "6Y",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "One Size",
-  ];
-  const randomSizes = allSizes
-    .sort(() => 0.5 - Math.random())
-    .slice(0, Math.floor(Math.random() * 4) + 1);
-  return { ...product, sizes: randomSizes };
+  const sizes = ["XS", "S", "M", "L", "XL", "4Y", "6Y", "7", "8", "9", "10", "11", "One Size"];
+  const assigned = sizes.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 4) + 1);
+  return { ...product, sizes: assigned.length ? assigned : ["One Size"] };
 };
 
-const ProductList = () => {
+export default function ProductList() {
+  const { category } = useParams();
   const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("name");
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(500);
+  const [sortBy, setSortBy] = useState("name");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => {
-        const sizedProducts = res.data.map(assignSizes);
-        setProducts(sizedProducts);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+    setLoading(true);
+    const url = category === "new"
+      ? "https://fakestoreapi.com/products?limit=5"
+      : category
+        ? `https://fakestoreapi.com/products/category/${category}`
+        : "https://fakestoreapi.com/products";
 
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch = (product.title + " " + product.category)
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(capitalize(product.category));
-    const matchesSize =
-      selectedSizes.length === 0 ||
-      product.sizes?.some((size) => selectedSizes.includes(size));
-    const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
-    return matchesSearch && matchesCategory && matchesSize && matchesPrice;
-  });
+    axios.get(url).then((res) => {
+      const productsWithSizes = res.data.map(assignSizes);
+      setProducts(productsWithSizes);
+      setLoading(false);
+    });
+  }, [category]);
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortOption === "name") return a.title.localeCompare(b.title);
-    if (sortOption === "price-low") return a.price - b.price;
-    if (sortOption === "price-high") return b.price - a.price;
-    return 0;
-  });
+  useEffect(() => {
+    let result = [...products];
+
+    // ✅ CATEGORY filter (case-insensitive)
+    if (selectedCategories.length > 0) {
+      result = result.filter((p) =>
+        selectedCategories.some((cat) => cat.toLowerCase() === p.category.toLowerCase())
+      );
+    }
+
+    // ✅ SIZE filter
+    if (selectedSizes.length > 0) {
+      result = result.filter((p) =>
+        p.sizes?.some((size) => selectedSizes.includes(size))
+      );
+    }
+
+    // ✅ PRICE filter
+    result = result.filter((p) => p.price >= minPrice && p.price <= maxPrice);
+
+    // ✅ SEARCH
+    if (searchTerm.trim() !== "") {
+      result = result.filter((p) =>
+        p.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // ✅ SORTING
+    if (sortBy === "name") {
+      result.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortBy === "priceLow") {
+      result.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "priceHigh") {
+      result.sort((a, b) => b.price - a.price);
+    }
+
+    setFilteredProducts(result);
+  }, [products, selectedCategories, selectedSizes, minPrice, maxPrice, sortBy, searchTerm]);
 
   return (
-    <div className="product-page">
-      <div className="sidebar">
-        <Search onSearchChange={setSearchTerm} />
-        <Filter
-          onCategoryChange={setSelectedCategories}
-          onSizeChange={setSelectedSizes}
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-        />
-      </div>
-
-      <div className="product-content">
-        <div className="product-header">
-          <div className="header-left">
-            <h2>All Products</h2>
-            <span className="product-count">
-              {sortedProducts.length} product
-              {sortedProducts.length !== 1 ? "s" : ""}
-            </span>
+    <div className="product-wrapper">
+      <div className="product-page">
+        <aside className="product-sidebar">
+          <div className="search-box">
+            <label><strong>Search</strong></label>
+            <input
+              type="text"
+              placeholder="Search products..."
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
-          <div className="sort-section">
-            <label>Sort by:</label>
-            <select
-              id="sort"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="name">Name</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
-          </div>
-        </div>
 
-        <div className="product-grid">
-          {sortedProducts.length > 0 ? (
-            sortedProducts.map((product) => (
-              <Link
-                to={`/products/${product.id}`}
-                key={product.id}
-                className="product-card"
+          <Filter
+            onCategoryChange={setSelectedCategories}
+            onSizeChange={setSelectedSizes}
+            onMinPriceChange={setMinPrice}
+            onMaxPriceChange={setMaxPrice}
+          />
+        </aside>
+
+        <section className="product-content">
+          <div className="product-header">
+            <div className="header-left">
+              <h2>All Products</h2>
+              <span className="product-count">{filteredProducts.length} products</span>
+            </div>
+            <div className="sort-section">
+              <label htmlFor="sort">Sort by:</label>
+              <select
+                id="sort"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
               >
-                <div className="product-image-container">
-                  <img src={product.image} alt={product.title} />
-                </div>
-                <div className="product-info">
-                  <div className="product-title">{product.title}</div>
-                  <div className="product-price">${product.price}</div>
-                  <div className="product-sizes">
-                    Sizes: {product.sizes?.join(", ")}
-                  </div>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <div className="no-products">
+                <option value="name">Name</option>
+                <option value="priceLow">Price: Low to High</option>
+                <option value="priceHigh">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>Loading products...</div>
+          ) : filteredProducts.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>
               <p>No products found.</p>
-              <span>Try adjusting your search, category, or size filters.</span>
+              <span>Try adjusting your filters.</span>
+            </div>
+          ) : (
+            <div className="product-grid">
+              {filteredProducts.map((product) => (
+                <Link to={`/products/${product.id}`} key={product.id} className="product-card">
+                  <div className="product-image-container">
+                    <img src={product.image} alt={product.title} />
+                  </div>
+                  <div className="product-info">
+                    <div className="product-title">{product.title}</div>
+                    <div className="product-price">${product.price.toFixed(2)}</div>
+                    <div className="product-sizes">Sizes: {product.sizes?.join(", ")}</div>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );
-};
-
-export default ProductList;
+}

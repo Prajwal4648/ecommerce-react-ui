@@ -1,4 +1,3 @@
-// src/App.js
 import { Routes, Route } from 'react-router-dom';
 
 // Admin Pages
@@ -7,53 +6,53 @@ import ManageUsers from './pages/Admin/ManageUsers';
 import ManageProducts from './pages/Admin/ManageProducts';
 
 // Cart & Order Components
-import Cart from './pages/Cart/Cart'; 
-import Checkout from './pages/Cart/Checkout'; 
+import Cart from './pages/Cart/Cart';
+import Checkout from './pages/Cart/Checkout';
 import OrderSummary from './pages/Cart/OrderSummary';
-import OrderSuccess from './pages/Cart/OrderSuccess'; 
+import OrderSuccess from './pages/Cart/OrderSuccess';
 
 // Product Pages
 import ProductList from './pages/Products/ProductList';
 import ProductDetails from './pages/Products/ProductDetails';
-
+import SearchResults from './pages/Products/SearchResults'; // ✅ Import for navbar search
 
 // Cart Context
 import { CartProvider } from './pages/Cart/CartContext';
 
-
-//home components
+// Home & Layout Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home/Home';
 
-
 function App() {
   return (
-    <><CartProvider>
+    <CartProvider>
       <Navbar />
       <Routes>
-        { /* home Routes */}
+        {/* Home */}
         <Route path="/" element={<Home />} />
-   
 
-        {/* Admin Routes */}
+        {/* Admin Panel */}
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<ManageUsers />} />
         <Route path="/admin/products" element={<ManageProducts />} />
 
-        {/* Cart Flow Routes */}
+        {/* Cart and Checkout */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-summary" element={<OrderSummary />} />
         <Route path="/order-success" element={<OrderSuccess />} />
 
-        {/*add products route*/}
-        <Route path='/products' element={<ProductList />} />
+        {/* Products and Categories */}
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/products/category/:category" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+
+        {/* Search Results */}
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
       <Footer />
     </CartProvider>
-    </>
   );
 }
 

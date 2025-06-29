@@ -12,7 +12,7 @@ import {
   FavoriteBorder,
   ShoppingBagOutlined,
 } from '@mui/icons-material';
-import SearchBar from './SearchBar'; // Update path if needed
+import SearchBar from './SearchBar';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -21,18 +21,23 @@ export default function Navbar() {
     <Box>
       {/* Promo Banner */}
       <Box
-  sx={{
-    bgcolor: 'black',
-    color: 'white',
-    textAlign: 'center',
-    py: 1,
-    fontSize: '0.9rem',
-  }}
->
-  FLASH SALE ⚡ 25% OFF Everything – Use code: QUICK25
-</Box>
+        sx={{
+          bgcolor: 'black',
+          color: 'white',
+          textAlign: 'center',
+          py: 1,
+          fontSize: '0.9rem',
+        }}
+      >
+        FLASH SALE ⚡ 25% OFF Everything – Use code: QUICK25
+      </Box>
 
-      <AppBar position="static" color="inherit" elevation={0}>
+      <AppBar
+        position="static"
+        color="inherit"
+        elevation={0}
+        sx={{ zIndex: 1300, overflow: 'visible' }} // <== updated
+      >
         <Toolbar
           sx={{
             px: { xs: 2, md: 4 },
@@ -46,11 +51,11 @@ export default function Navbar() {
           {/* Left Navigation */}
           <Stack direction="row" spacing={1} flexWrap="wrap" alignItems="center">
             {[
-              { label: 'Men', path: '/Products/Filters' },
-              { label: 'Women', path: '/Products/Filters' },
-              { label: 'Kids', path: '/Products/Filters' },
-              { label: 'New & Featured', path: '/Products/Filters' },
-              { label: 'Gift', path: '/Products/Filters' },
+              { label: 'Men', path: "/products/category/men's clothing" },
+              { label: 'Women', path: "/products/category/women's clothing" },
+              { label: 'Kids', path: '/products/category/electronics' },
+              { label: 'New & Featured', path: '/products/category/new' },
+              { label: 'Gift', path: '/products/category/jewelery' },
             ].map(({ label, path }) => (
               <Button
                 key={label}
@@ -78,7 +83,7 @@ export default function Navbar() {
                 fontSize: { xs: '1.3rem', sm: '1.6rem' },
                 cursor: 'pointer',
               }}
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/products')}
             >
               TOLUS
             </Typography>
@@ -86,7 +91,7 @@ export default function Navbar() {
 
           {/* Right Section */}
           <Stack direction="row" spacing={1} alignItems="center" flexWrap="nowrap">
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'block', sm: 'block' } }}> {/* changed xs from 'none' */}
               <SearchBar />
             </Box>
 
