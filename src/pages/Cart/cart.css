@@ -4,6 +4,7 @@
   justify-content: space-between;
   padding: 40px 60px;
   gap: 40px;
+  background-color: #f9f9f9;
   font-family: 'Segoe UI', sans-serif;
   flex-wrap: wrap;
 }
@@ -55,7 +56,7 @@
   border-radius: 10px;
   padding: 20px;
   margin: 20px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
   flex-wrap: wrap;
 }
 
@@ -133,7 +134,7 @@
   background: #fafafa;
   padding: 20px 30px;
   border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   height: fit-content;
   min-width: 280px;
 }
@@ -306,7 +307,7 @@
 }
 
 .promo-input-wrapper button {
-  padding: 10px 16px;
+  padding: 13px 16px;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 6px;

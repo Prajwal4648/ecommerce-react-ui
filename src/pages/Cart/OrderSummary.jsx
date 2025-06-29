@@ -102,7 +102,7 @@ const OrderSummary = ({ formData, paymentMethod }) => {
         </p>
         {isPromoApplied && (
           <p style={{color: 'green'}}>
-            Discount (FLAT10) <span>-₹{discount.toFixed(2)}</span>
+            Discount (QUICK25) <span>-₹{discount.toFixed(2)}</span>
           </p>
         )}
         <hr />

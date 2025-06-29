@@ -22,10 +22,10 @@ const Cart = () => {
   const total = subtotal + shipping + tax - discount;
 
   const handlePromoCode = () => {
-    if (promoCode.toUpperCase() === 'FLAT10' && !isPromoApplied) {
-      const discountAmount = (subtotal + shipping + tax) * 0.10;
+    if (promoCode.toUpperCase() === 'QUICK25' && !isPromoApplied) {
+      const discountAmount = (subtotal + shipping + tax) * 0.25;
       applyPromo(discountAmount);
-    } else if (promoCode.toUpperCase() !== 'FLAT10') {
+    } else if (promoCode.toUpperCase() !== 'QUICK25') {
       alert('Invalid promo code');
     } else if (isPromoApplied) {
       alert('Promo code already applied');
@@ -87,7 +87,7 @@ const Cart = () => {
         <p>Shipping <span>{shipping === 0 ? 'Free' : `₹${shipping.toFixed(2)}`}</span></p>
         <p>Tax <span>₹{tax.toFixed(2)}</span></p>
         {isPromoApplied && (
-          <p style={{color: 'green'}}>Discount (FLAT10) <span>-₹{discount.toFixed(2)}</span></p>
+          <p style={{color: 'green'}}>Discount (QUICK25) <span>-₹{discount.toFixed(2)}</span></p>
         )}
         <hr />
         <p className="total">Total <span>₹{total.toFixed(2)}</span></p>
