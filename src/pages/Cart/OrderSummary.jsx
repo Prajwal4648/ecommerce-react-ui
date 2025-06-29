@@ -9,7 +9,7 @@ const OrderSummary = ({ formData, paymentMethod }) => {
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 100 ? 0 : 10;
-  const tax = 14.40;
+ const tax = subtotal*0.08;
   const total = subtotal + shipping + tax - discount;
 
 
@@ -85,7 +85,7 @@ const OrderSummary = ({ formData, paymentMethod }) => {
               <p className="product-details">Size: S • Color: White</p>
               <p className="product-qty">Qty: {item.quantity}</p>
             </div>
-            <p className="product-price">₹{(item.price * item.quantity).toFixed(2)}</p>
+            <p  className="product-prices">₹{(item.price * item.quantity).toFixed(2)}</p>
           </div>
         ))}
       </div>

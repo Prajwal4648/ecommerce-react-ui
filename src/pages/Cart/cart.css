@@ -5,7 +5,7 @@
   padding: 40px 60px;
   gap: 40px;
   background-color: #f9f9f9;
-  font-family: 'Segoe UI', sans-serif;
+
   flex-wrap: wrap;
 }
 
@@ -200,14 +200,9 @@
 /* Empty Cart View */
 .empty-cart {
 
-
-
   position: fixed;
-
-  position: fixed;              /* Make it cover full screen */
-
-
-  position: fixed;              /* Make it cover full screen */
+  position: fixed;          
+  position: fixed;              
 
 
   position: fixed;              /* Make it cover full screen */
@@ -224,31 +219,30 @@
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
-  font-family: 'Segoe UI', sans-serif;
+  
   text-align: center;
 
   align-items: center;       
   justify-content: center;     
   text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+  
   background-color: white;     
   z-index: 999;                
   padding: 20px;            
 
 
-  align-items: center;         /* Horizontal center */
-  justify-content: center;     /* Vertical center */
+  align-items: center;         
+  justify-content: center;    
   text-align: center;
 
-  align-items: center;         /* Horizontal center */
-  justify-content: center;     /* Vertical center */
+  align-items: center;         
+  justify-content: center;   
   text-align: center;
 
-  font-family: 'Segoe UI', sans-serif;
-  background-color: white;     /* Optional - hides layout behind */
-  z-index: 999;                /* Keep it above all */
-  padding: 20px;               /* For smaller screens */
-
+  
+  background-color: white;    
+  z-index: 999;             
+  padding: 20px;             
   box-sizing: border-box;
   background: white;
   z-index: 10;

@@ -131,6 +131,7 @@ const Checkout = () => {
             <div className="payment-methods">
               <label className="payment-option">
                 <input 
+                id='op'
                   type="radio" 
                   name="paymentMethod" 
                   value="card"
@@ -142,6 +143,7 @@ const Checkout = () => {
               
               <label className="payment-option">
                 <input 
+                id='op'
                   type="radio" 
                   name="paymentMethod" 
                   value="cod"
@@ -156,6 +158,7 @@ const Checkout = () => {
             {paymentMethod === 'card' && (
               <div className="card-payment-fields">
                 <input 
+                 id='op'
                   type="text" 
                   name="cardNumber"
                   placeholder="Card Number" 

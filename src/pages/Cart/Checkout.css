@@ -126,8 +126,11 @@ input:not([type='checkbox']), select {
   height: 18px;
   cursor: pointer;
   margin:0%;
+ 
 }
-
+#op{
+      outline: none;
+}
 .payment-label {
   font-weight: 600;
 }
