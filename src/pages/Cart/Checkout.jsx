@@ -205,7 +205,7 @@ const Checkout = () => {
             {paymentMethod === 'cod' && (
               <div className="cod-info">
                 <div className="cod-message">
-                  <p>📦 <strong>Cash on Delivery Selected</strong></p>
+                  <h4 id="myHeading">📦 Cash on Delivery Selected</h4>
                   <p>You will pay when your order is delivered to your address.</p>
                   <ul>
                     <li>✅ No online payment required</li>

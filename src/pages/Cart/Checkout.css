@@ -8,6 +8,9 @@
  
 }
 
+#myHeading {
+  font-size: 20px;
+}
 /* Only the title on top */
 .checkout-title {
   font-size: 2rem;
