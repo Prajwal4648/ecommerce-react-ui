@@ -1,82 +1,50 @@
-import { useState, useEffect, useRef } from 'react'; 
+import { useNavigate } from 'react-router-dom';
 import {
-  AppBar, Box, Toolbar, Typography, IconButton, Button,
-  Stack, InputBase, Paper, List, ListItem, ListItemButton
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+  Stack,
+  Box,
 } from '@mui/material';
 import {
-  Search,
   FavoriteBorder,
   ShoppingBagOutlined,
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import SearchBar from './SearchBar'; // Update path if needed
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const [query, setQuery] = useState('');
-  const [products, setProducts] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
-  const wrapperRef = useRef(null);
-
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(setProducts)
-      .catch(err => console.error('Failed to fetch products:', err));
-  }, []);
-
-  useEffect(() => {
-    if (!query.trim()) {
-      setSuggestions([]);
-    } else {
-      const filtered = products
-        .filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
-        .slice(0, 5);
-      setSuggestions(filtered);
-    }
-  }, [query, products]);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setSuggestions([]);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleSearch = () => {
-    if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
-      setSuggestions([]);
-    }
-  };
 
   return (
     <Box>
+      {/* Promo Banner */}
       <Box
-        sx={{
-          bgcolor: 'black',
-          color: 'white',
-          textAlign: 'center',
-          py: 1,
-          fontSize: '0.9rem',
-        }}
-      >
-        Summer Sale 25% OFF – Code <strong>E-Event</strong>
-      </Box>
+  sx={{
+    bgcolor: 'black',
+    color: 'white',
+    textAlign: 'center',
+    py: 1,
+    fontSize: '0.9rem',
+  }}
+>
+  FLASH SALE ⚡ 25% OFF Everything – Use code: QUICK25
+</Box>
 
       <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar
           sx={{
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
             px: { xs: 2, md: 4 },
             py: 1.5,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           {/* Left Navigation */}
-          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          <Stack direction="row" spacing={1} flexWrap="wrap" alignItems="center">
             {[
               { label: 'Men', path: '/Products/Filters' },
               { label: 'Women', path: '/Products/Filters' },
@@ -101,75 +69,25 @@ export default function Navbar() {
             ))}
           </Stack>
 
-          {/* Center Logo */}
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            sx={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              fontSize: { xs: '1.3rem', sm: '1.6rem' },
-            }}
-          >
-            TOLUS
-          </Typography>
+          {/* Logo */}
+          <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              sx={{
+                fontSize: { xs: '1.3rem', sm: '1.6rem' },
+                cursor: 'pointer',
+              }}
+              onClick={() => navigate('/')}
+            >
+              TOLUS
+            </Typography>
+          </Box>
 
           {/* Right Section */}
-          <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-            <Box ref={wrapperRef} sx={{ position: 'relative' }}>
-              <Box
-                sx={{
-                  bgcolor: '#f1f1f1',
-                  px: 2,
-                  py: 0.5,
-                  borderRadius: 2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  width: { xs: '100%', sm: 200 },
-                }}
-              >
-                <InputBase
-                  placeholder="Search..."
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                  sx={{ flexGrow: 1 }}
-                />
-                <IconButton onClick={handleSearch}>
-                  <Search />
-                </IconButton>
-              </Box>
-
-              {suggestions.length > 0 && (
-                <Paper
-                  sx={{
-                    position: 'absolute',
-                    top: '100%',
-                    zIndex: 20,
-                    width: '100%',
-                    mt: 0.5,
-                    maxHeight: 200,
-                    overflowY: 'auto',
-                  }}
-                >
-                  <List dense>
-                    {suggestions.map((item) => (
-                      <ListItem key={item.id} disablePadding>
-                        <ListItemButton
-                          onClick={() => {
-                            navigate(`/search?q=${encodeURIComponent(item.title)}`);
-                            setQuery(item.title);
-                            setSuggestions([]);
-                          }}
-                        >
-                          {item.title}
-                        </ListItemButton>
-                      </ListItem>
-                    ))}
-                  </List>
-                </Paper>
-              )}
+          <Stack direction="row" spacing={1} alignItems="center" flexWrap="nowrap">
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <SearchBar />
             </Box>
 
             <IconButton>

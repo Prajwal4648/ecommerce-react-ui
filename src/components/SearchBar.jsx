@@ -6,7 +6,7 @@ import {
   Paper,
   List,
   ListItem,
-  ListItemButton
+  ListItemButton,
 } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -17,55 +17,71 @@ export default function SearchBar() {
   const [products, setProducts] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
 
-  // Fetch all products once for suggestions
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setProducts)
-      .catch(err => console.error('Failed to fetch products:', err));
+      .catch((err) => console.error('Failed to fetch products:', err));
   }, []);
 
-  // Filter suggestions on every query change
   useEffect(() => {
     if (!query.trim()) {
       setSuggestions([]);
     } else {
-      const filtered = products.filter(p =>
-        p.title.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 5);
+      const filtered = products
+        .filter((p) => p.title.toLowerCase().includes(query.toLowerCase()))
+        .slice(0, 5);
       setSuggestions(filtered);
     }
   }, [query, products]);
 
   const handleSearch = () => {
     if (query.trim()) {
-      navigate(`/search?q=${query.trim()}`);
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
       setSuggestions([]);
     }
   };
 
   return (
-    <Box sx={{ position: 'relative' }}>
-      {/* Search Input */}
+    <Box sx={{ position: 'relative', maxWidth: 250, width: '100%' }}>
+      {/* Search Input Container */}
       <Box
         sx={{
-          bgcolor: '#f1f1f1',
-          px: 2,
-          py: 0.5,
-          borderRadius: 2,
           display: 'flex',
           alignItems: 'center',
+          border: '1px solid #ccc',
+          borderRadius: '999px',
+          px: 2,
+          height: 36,
+          bgcolor: '#f5f5f5',
         }}
       >
         <InputBase
           placeholder="Search..."
           value={query}
-          onChange={e => setQuery(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleSearch()}
-          sx={{ width: 200 }}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          disableUnderline
+          sx={{
+            flex: 1,
+            fontSize: '0.9rem',
+            height: '100%',
+            px: 0,
+            '& input': {
+              padding: 0,
+              margin: 0,
+              height: '100%',
+              lineHeight: '36px', // Match outer container height
+              border: 'none',
+              background: 'transparent',
+              borderRadius: 0,
+              boxShadow: 'none',
+              outline: 'none',
+            },
+          }}
         />
-        <IconButton onClick={handleSearch}>
-          <Search />
+        <IconButton onClick={handleSearch} sx={{ p: 0.5 }}>
+          <Search fontSize="small" />
         </IconButton>
       </Box>
 
@@ -83,7 +99,7 @@ export default function SearchBar() {
           }}
         >
           <List dense>
-            {suggestions.map(item => (
+            {suggestions.map((item) => (
               <ListItem key={item.id} disablePadding>
                 <ListItemButton
                   onClick={() => {
