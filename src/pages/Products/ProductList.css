@@ -1,11 +1,12 @@
+/* Wrapper: Ensure no unexpected padding or alignment issues */
 .product-wrapper {
   width: 100%;
   max-width: 100%;
-  padding: 0 !important;
-  text-align: left !important;
+  padding: 0;
+  text-align: left;
 }
 
-/* Proper layout with sidebar and content side-by-side */
+/* Grid layout: Sidebar (left), Content (right) */
 .product-page {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -16,19 +17,19 @@
   align-items: start;
 }
 
-/* Sidebar (Filters) */
+/* Sidebar (filters) */
 .product-sidebar {
   background-color: #fff;
   width: 100%;
   max-width: 260px;
 }
 
-/* Content (Products) */
+/* Main product section */
 .product-content {
   width: 100%;
 }
 
-/* Header */
+/* Product header: Title + sorting */
 .product-header {
   display: flex;
   justify-content: space-between;
@@ -39,6 +40,7 @@
   border-bottom: 2px solid #f8f9fa;
 }
 
+/* Left side of header: Title and count */
 .header-left h2 {
   margin: 0;
   font-size: 1.8rem;
@@ -49,38 +51,44 @@
   font-size: 0.9rem;
   color: #666;
 }
+
+/* Sort dropdown area */
 .sort-section {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: nowrap;
+  gap: 12px; /* space between label and dropdown */
+  margin-right: 20px;
+  white-space: nowrap;
 }
+
 
 .sort-section label {
-  font-size: 1.5rem;
-  font-weight: 500;
-  white-space: nowrap;
-  line-height: 1;           /* ✅ Makes vertical alignment tighter */
+  font-size: 2.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
 }
 
+
+
 .sort-section select {
-  padding: 8px 12px;        /* ✅ Slightly taller for better vertical alignment */
+  padding: 8px 12px;
   border-radius: 6px;
   font-size: 1rem;
   border: 1px solid #ccc;
-  height: 40px;             /* ✅ Makes it visually aligned with label */
-  min-width: 160px;         /* ✅ Ensures consistent width */
+  height: 40px;
+  min-width: 160px;
   box-sizing: border-box;
 }
 
-
-/* Product Grid */
+/* Product cards grid */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
 }
 
+/* Individual product card */
 .product-card {
   background: #fff;
   border-radius: 10px;
@@ -92,8 +100,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Image container */
 .product-image-container {
   height: 180px;
   display: flex;
@@ -108,6 +123,7 @@
   object-fit: contain;
 }
 
+/* Product details (title, price, sizes) */
 .product-info {
   display: flex;
   flex-direction: column;
@@ -118,6 +134,8 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: #333;
+  height: 2.4em;
+  overflow: hidden;
 }
 
 .product-price {
@@ -131,7 +149,26 @@
   color: #666;
 }
 
-/* Responsive Fix */
+/* Search box in sidebar */
+.search-box {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-box label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.search-box input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Responsive tweaks */
 @media (max-width: 768px) {
   .product-page {
     display: flex;
@@ -146,5 +183,11 @@
 
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .sort-section {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 1rem;
   }
 }
