@@ -66,25 +66,30 @@ const Cart = () => {
       </div>
 
       <div className="cart-items">
-        {cartItems.map((item) => (
-          <div className="cart-item" key={`${item.id}-${item.size}-${item.color}`}>
-            <img src={item.image} alt={item.title} />
-            <div className="cart-item-details">
-              <h4>{item.title}</h4>
-              <p className="cart-color">
-                Size: {item.size} &nbsp; Color: {item.color}
-              </p>
-              <p>₹{item.price}</p>
-            </div>
-            <div className="quantity-controls">
-              <button onClick={() => handleQuantityDecrease(item, item.quantity)}>-</button>
-              <span>{item.quantity}</span>
-              <button onClick={() => updateQuantity(item, item.quantity + 1)}>+</button>
-            </div>
-            <span className="remove-btn" onClick={() => removeFromCart(item)}>🗑️</span>
-          </div>
-        ))}
+  {cartItems.map((item) => (
+    <div className="cart-item" key={`${item.id}-${item.size}-${item.color}`}>
+      <img src={item.image} alt={item.title} />
+      <div className="cart-item-details">
+        <h4>{item.title}</h4>
+
+        {item.size && item.color && (
+          <p className="cart-color">
+            Size: {item.size} &nbsp; Color: {item.color}
+          </p>
+        )}
+
+        <p>₹{item.price}</p>
       </div>
+      <div className="quantity-controls">
+        <button onClick={() => handleQuantityDecrease(item, item.quantity)}>-</button>
+        <span>{item.quantity}</span>
+        <button onClick={() => updateQuantity(item, item.quantity + 1)}>+</button>
+      </div>
+      <span className="remove-btn" onClick={() => removeFromCart(item)}>🗑️</span>
+    </div>
+  ))}
+</div>
+
 
       <div className="cart-summary">
         <h3>Order Summary</h3>
