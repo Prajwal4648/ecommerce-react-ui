@@ -4,21 +4,18 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../pages/Auth/Login';
 import PrivateRoute from './PrivateRoute';
 
-import AdminLayout from '../pages/Admin/index';
-import AdminDashboard from "../pages/Admin/AdminDashboard";
+import AdminLayout    from '../pages/Admin';            // index.jsx
+import AdminDashboard from '../pages/Admin/AdminDashboard';
 
-import ProductList from '../pages/Admin/ManageProducts/ProductList';
-import ProductsComponent from '../pages/Admin/ManageProducts/ProductsComponent'; // Fixed name
-
-import UserList from '../pages/Admin/ManageUsers/UserList';
+// (Users, Products imports gone)
 
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Public */}
+      {/* ---------- Public ---------- */}
       <Route path="/login" element={<Login />} />
 
-      {/* Protected Admin */}
+      {/* ---------- Protected Admin ---------- */}
       <Route
         path="/admin/*"
         element={
@@ -27,26 +24,15 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       >
-        {/* Dashboard Home */}
+        {/* Admin home = dashboard */}
         <Route index element={<AdminDashboard />} />
 
-        {/* Products */}
-        <Route path="products">
-          <Route index element={<ProductList />} />
-          {/* Temporarily comment out until ProductForm is created */}
-          {/* <Route path="new" element={<ProductForm />} />
-          <Route path=":id/edit" element={<ProductForm />} /> */}
-        </Route>
-
-        {/* Users */}
-        <Route path="users" element={<UserList />} />
-
-        {/* 404 in Admin */}
+        {/* Fallback inside /admin */}
         <Route path="*" element={<h2>Page Not Found</h2>} />
       </Route>
 
       {/* Global 404 */}
-      <Route path="*" element={<h2>404 - Page Not Found</h2>} />
+      <Route path="*" element={<h2>404 ‑ Page Not Found</h2>} />
     </Routes>
   );
 }

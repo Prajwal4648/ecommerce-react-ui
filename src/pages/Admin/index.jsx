@@ -12,13 +12,13 @@ export default function AdminLayout() {
 
   return (
     <div>
-      <h1>Admin Panel</h1>
+      {/* <h1>Admin Panel</h1>
       <nav>
         <Link to="/admin">Dashboard</Link> |{' '}
         <Link to="/admin/products">Manage Products</Link> |{' '}
         <Link to="/admin/users">Manage Users</Link> |{' '}
         <button onClick={handleLogout}>Logout</button>
-      </nav>
+      </nav> */}
       <hr />
       <Outlet />
     </div>

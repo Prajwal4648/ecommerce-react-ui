@@ -118,7 +118,7 @@ body {
   font-weight: 500;
   color: var(--muted);
   cursor: pointer;
-  transition: background 0.15s;
+  transition:background 0.15s;
 }
 
 .tab-btn:last-child {
