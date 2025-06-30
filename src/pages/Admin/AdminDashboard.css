@@ -1,8 +1,10 @@
-/* ──────────────────  src/pages/Admin/AdminDashboard.css  ────────────────── */
-/* 0. Google‑font import */
+/* ─────  src/pages/Admin/AdminDashboard.css  (scoped)  ───── */
+
+/* 1. Font (still global safe) */
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
-:root {
+/* 2. Scoped variables + base styles */
+.admin-dash-wrapper {
   --bg: #f8fafc;
   --white: #ffffff;
   --border: #e2e8f0;
@@ -11,55 +13,53 @@
   --primary: #3b82f6;
   --success: #059669;
   --danger: #dc2626;
-}
 
-/* ------------ Base ------------ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-body {
   font-family: "Funnel Sans", sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
 
-/* ------------ Layout wrappers ------------ */
-.admin-dashboard {
-  width: 100vw;
-  min-height: 100vh;
+/* reset only inside wrapper */
+.admin-dash-wrapper *,
+.admin-dash-wrapper *::before,
+.admin-dash-wrapper *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* ---------- Layout wrappers ---------- */
+.admin-dash-wrapper .admin-dashboard {
+  width: 100%;
+  min-height: 100%;
   padding: 2rem;
   background: var(--bg);
 }
 
-.dashboard-header {
+.admin-dash-wrapper .dashboard-header {
   margin-bottom: 2rem;
 }
 
-.dashboard-header h1 {
+.admin-dash-wrapper .dashboard-header h1 {
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
 }
 
-.subtitle {
+.admin-dash-wrapper .subtitle {
   color: var(--muted);
   font-size: 1rem;
 }
 
-/* ------------ Stat cards ------------ */
-.stats-grid {
+/* ---------- Stat cards ---------- */
+.admin-dash-wrapper .stats-grid {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-bottom: 2rem;
 }
 
-.stat-card {
+.admin-dash-wrapper .stat-card {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -68,19 +68,19 @@ body {
   transition: 0.2s ease;
 }
 
-.stat-card:hover {
+.admin-dash-wrapper .stat-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
 }
 
-.stat-card-content {
+.admin-dash-wrapper .stat-card-content {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.stat-card-title {
+.admin-dash-wrapper .stat-card-title {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -88,20 +88,20 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.stat-card-value {
+.admin-dash-wrapper .stat-card-value {
   font-size: 1.75rem;
   font-weight: 700;
 }
 
-.stat-card-icon {
+.admin-dash-wrapper .stat-card-icon {
   width: 38px;
   height: 38px;
   color: var(--primary);
   opacity: 0.85;
 }
 
-/* ------------ Tabs nav ------------ */
-.tabs-nav {
+/* ---------- Tabs nav ---------- */
+.admin-dash-wrapper .tabs-nav {
   display: flex;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -109,7 +109,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.tab-btn {
+.admin-dash-wrapper .tab-btn {
   flex: 1;
   padding: 0.8rem 1rem;
   background: var(--white);
@@ -118,46 +118,46 @@ body {
   font-weight: 500;
   color: var(--muted);
   cursor: pointer;
-  transition:background 0.15s;
+  transition: background 0.15s;
 }
 
-.tab-btn:last-child {
+.admin-dash-wrapper .tab-btn:last-child {
   border-right: none;
 }
 
-.tab-btn:hover {
+.admin-dash-wrapper .tab-btn:hover {
   background: #f1f5f9;
 }
 
-.tab-btn.active {
+.admin-dash-wrapper .tab-btn.active {
   color: var(--primary);
   background: #f1f5f9;
 }
 
-/* ------------ Tab panel ------------ */
-.tab-panel {
+/* ---------- Tab panel ---------- */
+.admin-dash-wrapper .tab-panel {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 2rem;
 }
 
-/* ==========  PRODUCTS TAB  ========== */
-.products-tab {
+/* ===== PRODUCTS TAB ===== */
+.admin-dash-wrapper .products-tab {
   display: grid;
-  grid-template-columns: 360px 1fr; /* fixed form width + fluid list */
+  grid-template-columns: 360px 1fr;
   gap: 2rem;
   align-items: flex-start;
 }
 
 @media (max-width: 900px) {
-  .products-tab {
-    grid-template-columns: 1fr; /* stack on small screens */
+  .admin-dash-wrapper .products-tab {
+    grid-template-columns: 1fr;
   }
 }
 
-/* ----- add‑product form ----- */
-.add-product-form {
+/* add‑product form */
+.admin-dash-wrapper .add-product-form {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -171,12 +171,12 @@ body {
 }
 
 @media (max-width: 900px) {
-  .add-product-form {
-    position: static; /* no sticky when stacked */
+  .admin-dash-wrapper .add-product-form {
+    position: static;
   }
 }
 
-.form-heading {
+.admin-dash-wrapper .form-heading {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -184,25 +184,25 @@ body {
   font-weight: 600;
 }
 
-.form-label {
+.admin-dash-wrapper .form-label {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text);
 }
 
-.form-input {
+.admin-dash-wrapper .form-input {
   padding: 0.65rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.9rem;
 }
 
-.form-input:focus {
+.admin-dash-wrapper .form-input:focus {
   outline: 2px solid var(--primary);
   outline-offset: 1px;
 }
 
-.submit-btn {
+.admin-dash-wrapper .submit-btn {
   margin-top: 0.5rem;
   padding: 0.75rem;
   background: var(--text);
@@ -214,29 +214,29 @@ body {
   transition: opacity 0.15s;
 }
 
-.submit-btn:hover {
+.admin-dash-wrapper .submit-btn:hover {
   opacity: 0.9;
 }
 
-/* ----- products list ----- */
-.products-list-wrapper {
+/* products list */
+.admin-dash-wrapper .products-list-wrapper {
   width: 100%;
 }
 
-.list-heading {
+.admin-dash-wrapper .list-heading {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1.25rem;
 }
 
-.products-list {
+.admin-dash-wrapper .products-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.product-row {
+.admin-dash-wrapper .product-row {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -244,40 +244,39 @@ body {
   position: relative;
 }
 
-.product-meta {
+.admin-dash-wrapper .product-meta {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.product-name {
+.admin-dash-wrapper .product-name {
   font-weight: 600;
   font-size: 1rem;
 }
 
-.product-status {
+.admin-dash-wrapper .product-status {
   padding: 0.15rem 0.5rem;
   font-size: 0.75rem;
-  text-transform: lowercase;
   border-radius: 9999px;
   color: var(--white);
 }
 
-.product-status.active {
+.admin-dash-wrapper .product-status.active {
   background: var(--primary);
 }
 
-.product-status.inactive {
+.admin-dash-wrapper .product-status.inactive {
   background: var(--muted);
 }
 
-.product-secondary {
+.admin-dash-wrapper .product-secondary {
   color: var(--muted);
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
-.product-actions {
+.admin-dash-wrapper .product-actions {
   position: absolute;
   right: 0.75rem;
   top: 50%;
@@ -287,14 +286,14 @@ body {
 }
 
 @media (max-width: 900px) {
-  .product-actions {
+  .admin-dash-wrapper .product-actions {
     position: static;
     transform: none;
     margin-top: 0.75rem;
   }
 }
 
-.icon-btn {
+.admin-dash-wrapper .icon-btn {
   width: 34px;
   height: 34px;
   border: 1px solid var(--border);
@@ -306,20 +305,38 @@ body {
   transition: background 0.1s;
 }
 
-.icon-btn:hover {
+.admin-dash-wrapper .icon-btn:hover {
   background: #f1f5f9;
 }
 
-.icon-btn.danger svg {
+.admin-dash-wrapper .icon-btn.danger svg {
   color: var(--danger);
 }
 
-/* ==========  Placeholder tabs  ========== */
-.placeholder {
+/* ===== Placeholder ===== */
+.admin-dash-wrapper .placeholder {
   padding: 3rem;
   border: 2px dashed var(--border);
   border-radius: 12px;
   color: var(--muted);
   text-align: center;
   font-weight: 500;
+}
+
+/* ════════════════════════════════════════════════════════
+   FULL‑BLEED helper — ignores any parent “container” width
+   ════════════════════════════════════════════════════════ */
+.admin-dash-wrapper.full-bleed {
+  /* make the wrapper as wide as the viewport */
+  width: 100vw;
+  max-width: 100vw;
+
+  /* pull it out of centered containers */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* if parent is flex or CSS‑grid, own a whole row */
+  flex: 0 0 100%;
+  grid-column: 1 / -1;
 }
