@@ -9,6 +9,8 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+
   const [quantity, setQuantity] = useState(1);
   
   // Get addToCart function from cart context
@@ -64,16 +66,18 @@ const ProductDetails = () => {
 
   // Handle add to cart with selected options
   const handleAddToCart = () => {
-    if (showClothingOptions && !selectedSize) {
-      alert("Please select a size before adding to cart");
-      return;
-    }
+    if (showClothingOptions && (!selectedSize || !selectedColor)) {
+  alert("Please select both size and color before adding to cart");
+  return;
+}
+
 
     const productToAdd = {
-      ...product,
-      selectedSize: selectedSize || null,
-      quantity: quantity
-    };
+  ...product,
+  size: selectedSize,
+  color: selectedColor,
+  quantity: quantity,
+};
 
     addToCart(productToAdd);
     
@@ -125,11 +129,17 @@ const ProductDetails = () => {
                   ))}
                 </select>
                 <label>Color</label>
-                <div className="colors">
-                  <div className="color white"></div>
-                  <div className="color black"></div>
-                  <div className="color blue"></div>
-                </div>
+<div className="colors">
+  {["white", "black", "blue"].map((color) => (
+    <div
+      key={color}
+      className={`color ${color} ${selectedColor === color ? "selected" : ""}`}
+      onClick={() => setSelectedColor(color)}
+      title={color}
+    ></div>
+  ))}
+</div>
+
               </>
             )}
 

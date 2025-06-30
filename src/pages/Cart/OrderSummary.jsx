@@ -82,7 +82,7 @@ const OrderSummary = ({ formData, paymentMethod }) => {
             <img src={item.image} alt={item.title} className="product-img" />
             <div className="product-info">
               <p className="product-title">{item.title}</p>
-              <p className="product-details">Size: S • Color: White</p>
+              <p className="product-details">{item.size && `Size: ${item.size}`} {item.color && `• Color: ${item.color}`}</p>
               <p className="product-qty">Qty: {item.quantity}</p>
             </div>
             <p  className="product-prices">₹{(item.price * item.quantity).toFixed(2)}</p>

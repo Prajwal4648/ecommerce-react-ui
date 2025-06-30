@@ -17,6 +17,9 @@
   gap: 2rem;
 }
 
+.item-details{
+  text-transform: uppercase;
+}
 /* Success Header */
 .success-header {
   text-align: center;

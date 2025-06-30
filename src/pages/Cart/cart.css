@@ -8,7 +8,9 @@
 
   flex-wrap: wrap;
 }
-
+.cart-color{
+  text-transform: uppercase;
+}
 /* Header row with title and clear cart button */
 .cart-title-row {
   display: flex;

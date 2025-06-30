@@ -57,6 +57,7 @@
   color: #555;
   font-size: 0.875rem;
   margin: 2px 0;
+  text-transform: uppercase;
 }
 
 .product-prices {
