@@ -6,7 +6,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const form = e.target;
 
     const password = form.password.value;
@@ -26,7 +25,7 @@ const Register = () => {
         lastname: form.fullName.value.split(" ")[1] || "",
       },
       address: {
-        city: "Sample City", 
+        city: "Sample City",
         street: form.address.value,
         number: parseInt(form.userId.value) || 1,
         zipcode: "000000",
@@ -46,8 +45,6 @@ const Register = () => {
       });
 
       const result = await response.json();
-      console.log("User registered:", result);
-
       alert("Account created successfully!");
       navigate("/");
     } catch (error) {
@@ -56,33 +53,21 @@ const Register = () => {
     }
   };
 
-  const goToLogin = () => {
-    navigate('/');
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-[600px] bg-gray p-10 rounded-xl ">
-        <h1 className="text-3xl font-bold text-center mb-2">Create Account</h1>
-        <p className="text-center text-gray-500 mb-6">Start your journey with us</p>
-
-        <p className="text-center text-sm text-gray-500 mb-6">
-          Already have an account?{' '}
-          <button
-            onClick={goToLogin}
-            className="text-black font-semibold hover:underline"
-          >
-            Sign in
-          </button>
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-blue-800 to-blue-600 px-4">
+      <div className="bg-white p-10 rounded-3xl shadow-xl w-full max-w-2xl">
+        <h2 className="text-3xl font-bold text-center text-gray-800">Create Account</h2>
+        <p className="text-sm text-center text-gray-500 mb-6">
+          Start your journey with us
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1">User ID</label>
             <input
-              type="text"
               name="userId"
-              placeholder="Enter a user ID"
+              type="text"
+              placeholder="Enter user ID"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
             />
@@ -91,8 +76,8 @@ const Register = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Username</label>
             <input
-              type="text"
               name="username"
+              type="text"
               placeholder="Choose a username"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
@@ -102,8 +87,8 @@ const Register = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Full Name</label>
             <input
-              type="text"
               name="fullName"
+              type="text"
               placeholder="First Last"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
@@ -111,10 +96,10 @@ const Register = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Email address</label>
+            <label className="block text-sm font-medium mb-1">Email</label>
             <input
-              type="email"
               name="email"
+              type="email"
               placeholder="you@example.com"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
@@ -124,8 +109,8 @@ const Register = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Password</label>
             <input
-              type="password"
               name="password"
+              type="password"
               placeholder="••••••••"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
@@ -135,8 +120,8 @@ const Register = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Confirm Password</label>
             <input
-              type="password"
               name="confirmPassword"
+              type="password"
               placeholder="Re-enter password"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
@@ -146,9 +131,9 @@ const Register = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Phone Number</label>
             <input
-              type="tel"
               name="phone"
-              placeholder="e.g. 9876543210"
+              type="tel"
+              placeholder="9876543210"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
             />
@@ -157,25 +142,38 @@ const Register = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Address</label>
             <input
-              type="text"
               name="address"
+              type="text"
               placeholder="Street address"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
               required
             />
           </div>
 
-          <label className="flex items-start gap-2 text-sm">
-            <input type="checkbox" className="mt-1" required />
+          <div className="col-span-full flex items-start gap-2 text-sm mt-2">
+            <input type="checkbox" required className="mt-1" />
             I agree to the Terms and Conditions and Privacy Policy
-          </label>
+          </div>
 
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 rounded-lg hover:opacity-90 transition"
-          >
-            Create Account
-          </button>
+          <div className="col-span-full">
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-2 rounded-lg shadow-md hover:opacity-90 transition"
+            >
+              Create Account
+            </button>
+          </div>
+
+          <p className="col-span-full text-sm text-center mt-4 text-gray-500">
+            Already have an account?{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/")}
+              className="text-purple-600 font-medium hover:underline"
+            >
+              Sign in
+            </button>
+          </p>
         </form>
       </div>
     </div>

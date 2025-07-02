@@ -39,7 +39,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-10">
+    <div className="min-h-screen bg-gray-300 px-4 py-10">
       <div className="max-w-screen-xl w-full mx-auto bg-white rounded-xl shadow p-10 border border-gray-300">
         <h2 className="text-3xl font-bold mb-8">Profile Information</h2>
         <form onSubmit={handleUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -105,13 +105,14 @@ const Profile = () => {
           </div>
 
           <div className="col-span-1 md:col-span-2 mt-4">
-            <button
-              type="submit"
-              className="bg-black text-white px-6 py-3 rounded-lg hover:opacity-90"
-            >
-              Update Profile
-            </button>
-          </div>
+  <button
+    type="submit"
+    className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 py-3 rounded-lg shadow-md hover:opacity-90 transition"
+  >
+    Update Profile
+  </button>
+</div>
+
         </form>
       </div>
     </div>

@@ -1,37 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiLock } from 'react-icons/fi';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    const username = e.target.username.value;
-    const password = e.target.password.value;
 
     try {
       const response = await fetch('https://fakestoreapi.com/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: email,
+          password: password
+        })
       });
 
       const data = await response.json();
 
       if (data.token) {
-        
         localStorage.setItem('token', data.token);
         alert('Login successful!');
         navigate('/home');
       } else {
-        alert('Login failed. Please check your credentials.');
+        alert('Invalid credentials');
       }
-    } catch (error) {
-      alert('Something went wrong. Try again.');
-      console.error(error);
+    } catch (err) {
+      alert('Something went wrong');
+      console.error(err);
     }
   };
 
@@ -40,59 +40,59 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-[600px] bg-gray p-10 rounded-xl ">
-        <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
-        <p className="text-center text-gray-500 mb-6">Sign in to your account</p>
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-blue-700 to-blue-400">
+      <div className="bg-white p-8 rounded-3xl shadow-xl max-w-300 w-full">
+        {/* Lock icon at the top */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-gradient-to-r from-blue-400 to-blue-600 p-4 rounded-full">
+            <FiLock className="text-white text-2xl" />
+          </div>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <h2 className="text-2xl font-semibold text-center text-gray-800">Welcome Back</h2>
+        <p className="text-sm text-center text-gray-500 mb-6">Sign in to your account</p>
+
+        <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Username</label>
+            <label className="text-sm font-medium text-gray-700 block mb-1">Username</label>
             <input
-              name="username"
               type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your username"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="text-sm font-medium text-gray-700 block mb-1">Password</label>
             <input
-              name="password"
               type="password"
-              placeholder="••••••••"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
               required
             />
-          </div>
-
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Remember me
-            </label>
-            <a href="#" className="text-black font-medium">
-              Forgot password?
-            </a>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded-lg hover:opacity-90 transition"
+            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-2 rounded-lg shadow-md hover:opacity-90 transition"
           >
-            Sign in
+            Sign In
           </button>
         </form>
 
-        <p className="text-sm text-center text-gray-500 mt-6">
+        <p className="text-sm text-center mt-6 text-gray-500">
           Don’t have an account?{' '}
           <button
+            type="button"
             onClick={goToRegister}
-            className="text-black font-semibold hover:underline"
+            className="text-purple-600 font-medium hover:underline"
           >
-            Sign up
+            Sign Up
           </button>
         </p>
       </div>
