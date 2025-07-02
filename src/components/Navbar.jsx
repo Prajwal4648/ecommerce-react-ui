@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -9,13 +9,29 @@ import {
   Box,
 } from '@mui/material';
 import {
+  AccountCircle,
+
   FavoriteBorder,
   ShoppingBagOutlined,
 } from '@mui/icons-material';
 import SearchBar from './SearchBar';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check login state on location change
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   return (
     <Box>
@@ -36,7 +52,7 @@ export default function Navbar() {
         position="static"
         color="inherit"
         elevation={0}
-        sx={{ zIndex: 1300, overflow: 'visible' }} // <== updated
+        sx={{ zIndex: 1300, overflow: 'visible' }}
       >
         <Toolbar
           sx={{
@@ -91,7 +107,7 @@ export default function Navbar() {
 
           {/* Right Section */}
           <Stack direction="row" spacing={1} alignItems="center" flexWrap="nowrap">
-            <Box sx={{ display: { xs: 'block', sm: 'block' } }}> {/* changed xs from 'none' */}
+            <Box sx={{ display: { xs: 'block', sm: 'block' } }}>
               <SearchBar />
             </Box>
 
@@ -103,17 +119,44 @@ export default function Navbar() {
               <ShoppingBagOutlined />
             </IconButton>
 
-            <Button
-              onClick={() => navigate('/login')}
-              sx={{
-                textTransform: 'none',
-                color: '#000',
-                fontWeight: 500,
-                fontSize: '0.9rem',
-              }}
-            >
-              Login
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <IconButton
+  onClick={() => navigate('/profile')}
+  sx={{ color: '#000' }}
+>
+  <AccountCircle />
+</IconButton>
+
+  
+
+
+
+                <Button
+                  onClick={handleLogout}
+                  sx={{
+                    textTransform: 'none',
+                    color: '#000',
+                    fontWeight: 500,
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                onClick={() => navigate('/login')}
+                sx={{
+                  textTransform: 'none',
+                  color: '#000',
+                  fontWeight: 500,
+                  fontSize: '0.9rem',
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Stack>
         </Toolbar>
       </AppBar>

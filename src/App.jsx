@@ -5,6 +5,11 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import ManageUsers from './pages/Admin/ManageUsers';
 import ManageProducts from './pages/Admin/ManageProducts';
 
+//login , register and profile
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
+import Profile from './pages/Auth/Profile';
+
 // Cart & Order Components
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Cart/Checkout';
@@ -31,6 +36,11 @@ function App() {
       <Routes>
         {/* Home */}
         <Route path="/" element={<Home />} />
+
+        {/* Login ,regoster and profile */}
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/profile" element={<Profile/>}/>
 
         {/* Admin Panel */}
         <Route path="/admin" element={<AdminDashboard />} />
