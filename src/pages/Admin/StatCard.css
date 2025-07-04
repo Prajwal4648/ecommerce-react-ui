@@ -1,6 +1,6 @@
 .admin-dashboard-wrapper .stat-card {
   background-color: white;
-  padding: 1.5rem;
+  padding: 0.5rem; /* ↓ reduced from 1.5rem to make card shorter */
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
@@ -15,12 +15,53 @@
 
 .admin-dashboard-wrapper .stat-label {
   color: #64748b;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 0.57rem;
+  font-weight: 100;
 }
 
 .admin-dashboard-wrapper .stat-value {
-  font-size: 2rem;
+  font-size: 0.5rem;
+  font-weight: 100;
+  color: #1e293b;
+}
+
+/* ─── Stat‑card side‑by‑side value & icon 2025‑07‑04 ───────────── */
+
+/* card wrapper */
+.admin-stat-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* title */
+.admin-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* value‑and‑icon row */
+.admin-stat-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* value */
+.admin-stat-value {
+  font-size: 1.4rem;
   font-weight: 700;
   color: #1e293b;
+}
+
+/* icon (inherits its colour from inline style) */
+.admin-stat-icon {
+  flex-shrink: 0;
+  font-size: 1.5rem; /* for Safari where size prop targets viewBox */
 }

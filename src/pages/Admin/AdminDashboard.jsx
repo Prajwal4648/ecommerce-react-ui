@@ -231,20 +231,14 @@ const ProductsTab = () => {
   USERS TAB  (DELETE SUPPORT ADDED)
 *************************************************************************/
 const UserRow = ({ user, onDelete }) => (
-  <div className="card-box user-row">
+  <div className="user-row">
     <div className="user-info">
-      <strong>
-        {user.name.firstname} {user.name.lastname}
-      </strong>
-      <br />
-      <span>
-        {user.email} • {user.phone}
-      </span>
+      <strong>{user.name?.firstname} {user.name?.lastname}</strong>
+      <span>{user.email} • {user.phone}</span>
     </div>
-
     <button
-      className="icon-btn danger"
-      title="Delete user"
+      className="icon-btn"
+      title="Delete"
       onClick={() => onDelete(user.id)}
     >
       <Trash size={16} />
@@ -256,7 +250,7 @@ const UsersTab = () => {
   const [users, setUsers] = useState(() => getLS(LS.USERS, []));
 
   useEffect(() => {
-    if (users.length) return; // already in LS
+    if (users.length) return;
     fetchAllUsers()
       .then((u) => {
         setUsers(u);
@@ -265,7 +259,6 @@ const UsersTab = () => {
       .catch((err) => console.error("Users fetch error", err));
   }, [users.length]);
 
-  /* delete */
   const handleDelete = (id) => {
     const updated = users.filter((u) => u.id !== id);
     setUsers(updated);
@@ -273,18 +266,35 @@ const UsersTab = () => {
   };
 
   return (
-    <div className="products-tab grid-layout">
-      {users.map((u) => (
-        <UserRow key={u.id} user={u} onDelete={handleDelete} />
-      ))}
-    </div>
+    <section className="users-list-wrapper">
+      <h3 className="list-heading">Users ({users.length})</h3>
+      <div className="users-scrollable">
+        <div className="products-tab grid-layout">
+          {users.map((u) => (
+            <UserRow key={u.id} user={u} onDelete={handleDelete} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 
 /*************************************************************************
-  ORDERS TAB  (unchanged)
+   ORDER ROW (simple details only)
 *************************************************************************/
-const generateMockOrders = (products, users, count = 8) => {
+const OrderRow = ({ order }) => (
+  <div className="order-row card-box">
+    <strong>Order #{order.id}</strong>
+    <span>
+      {order.customer} • ${order.total.toFixed(2)} • {order.status}
+    </span>
+  </div>
+);
+
+/*************************************************************************
+   ORDERS UTIL – create dummy data once
+*************************************************************************/
+const generateMockOrders = (products, users, count = 20) => {
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
   return Array.from({ length: count }, (_, i) => {
     const prod = pick(products);
@@ -295,32 +305,37 @@ const generateMockOrders = (products, users, count = 8) => {
       customer: `${user?.name?.firstname ?? "Anon"} ${
         user?.name?.lastname ?? ""
       }`.trim(),
-      total: prod ? prod.price * Math.ceil(Math.random() * 3) : 0,
+      total: prod ? prod.price * (Math.floor(Math.random() * 3) + 1) : 0,
       status: Math.random() > 0.5 ? "processing" : "delivered"
     };
   });
 };
 
+
+/*************************************************************************
+   ORDERS TAB – scrollable single‑column list
+*************************************************************************/
 const OrdersTab = () => {
   const prod = getLS(LS.PRODUCTS, []);
-  const usr = getLS(LS.USERS, []);
+  const usr  = getLS(LS.USERS, []);
   const [orders] = useState(() =>
     getLS(LS.ORDERS, generateMockOrders(prod, usr))
   );
   useEffect(() => saveLS(LS.ORDERS, orders), [orders]);
 
   return (
-    <div className="products-tab grid-layout">
-      {orders.map((o) => (
-        <div key={o.id} className="card-box">
-          <strong>Order #{o.id}</strong>
-          <br />
-          <span>
-            {o.customer} • ${o.total.toFixed(2)} • {o.status}
-          </span>
+    <section className="orders-list-wrapper">
+      <h3 className="list-heading">Orders ({orders.length})</h3>
+
+      {/* scroll container */}
+      <div className="orders-scrollable">
+        <div className="orders-list">
+          {orders.map((o) => (
+            <OrderRow key={o.id} order={o} />
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
 
@@ -347,9 +362,9 @@ const AnalyticsTab = () => {
         <div className="analytic-card">
           📦 Orders Processed: {orders.length}
         </div>
-        <div className="analytic-card">
+        {/* <div className="analytic-card">
           🚫 Out of Stock Products: {outOfStock}
-        </div>
+        </div> */}
         <div className="analytic-card">⭐ Most Viewed: Casual Sneakers</div>
         <div className="analytic-card">
           📈 Avg Order Value: $
