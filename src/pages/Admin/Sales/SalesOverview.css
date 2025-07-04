@@ -1,4 +1,4 @@
-.sales-overview {
+.admin-dashboard-wrapper .sales-overview {
   background-color: white;
   padding: 1.5rem;
   border-radius: 0.75rem;
@@ -6,20 +6,20 @@
   border: 1px solid #e2e8f0;
 }
 
-.sales-title {
+.admin-dashboard-wrapper .sales-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: #1e293b;
   margin: 0 0 1rem 0;
 }
 
-.sales-list {
+.admin-dashboard-wrapper .sales-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.sales-item {
+.admin-dashboard-wrapper .sales-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,29 +29,29 @@
   transition: background-color 0.2s;
 }
 
-.sales-item:hover {
+.admin-dashboard-wrapper .sales-item:hover {
   background-color: #f1f5f9;
 }
 
-.sales-period {
+.admin-dashboard-wrapper .sales-period {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.period-indicator {
+.admin-dashboard-wrapper .period-indicator {
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
 }
 
-.period-label {
+.admin-dashboard-wrapper .period-label {
   color: #64748b;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.sales-amount {
+.admin-dashboard-wrapper .sales-amount {
   font-weight: 600;
   color: #1e293b;
   font-size: 1rem;

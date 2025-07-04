@@ -1,4 +1,4 @@
-.top-categories {
+.admin-dashboard-wrapper .top-categories {
   background-color: white;
   padding: 1.5rem;
   border-radius: 0.75rem;
@@ -6,20 +6,20 @@
   border: 1px solid #e2e8f0;
 }
 
-.categories-title {
+.admin-dashboard-wrapper .categories-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: #1e293b;
   margin: 0 0 1rem 0;
 }
 
-.categories-list {
+.admin-dashboard-wrapper .categories-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.category-item {
+.admin-dashboard-wrapper .category-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,36 +29,36 @@
   transition: background-color 0.2s;
 }
 
-.category-item:hover {
+.admin-dashboard-wrapper .category-item:hover {
   background-color: #f1f5f9;
 }
 
-.category-info {
+.admin-dashboard-wrapper .category-info {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.category-indicator {
+.admin-dashboard-wrapper .category-indicator {
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
 }
 
-.category-name {
+.admin-dashboard-wrapper .category-name {
   color: #64748b;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.category-percentage {
+.admin-dashboard-wrapper .category-percentage {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   min-width: 80px;
 }
 
-.percentage-text {
+.admin-dashboard-wrapper .percentage-text {
   font-weight: 600;
   color: #1e293b;
   font-size: 0.875rem;
@@ -66,7 +66,7 @@
   text-align: right;
 }
 
-.percentage-bar {
+.admin-dashboard-wrapper .percentage-bar {
   width: 40px;
   height: 4px;
   background-color: #e2e8f0;
@@ -74,7 +74,7 @@
   overflow: hidden;
 }
 
-.percentage-fill {
+.admin-dashboard-wrapper .percentage-fill {
   height: 100%;
   transition: width 0.3s ease;
   border-radius: 2px;

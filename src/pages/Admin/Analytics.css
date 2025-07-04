@@ -1,4 +1,4 @@
-.analytics-container {
+.admin-dashboard-wrapper .analytics-container {
   background-color: white;
   padding: 1.5rem;
   border-radius: 0.75rem;
@@ -6,26 +6,26 @@
   border: 1px solid #e2e8f0;
 }
 
-.analytics-header {
+.admin-dashboard-wrapper .analytics-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
 }
 
-.analytics-title {
+.admin-dashboard-wrapper .analytics-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: #1e293b;
   margin: 0;
 }
 
-.time-selector {
+.admin-dashboard-wrapper .time-selector {
   display: flex;
   align-items: center;
 }
 
-.time-select {
+.admin-dashboard-wrapper .time-select {
   padding: 0.5rem 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 0.375rem;
@@ -34,74 +34,74 @@
   cursor: pointer;
 }
 
-.time-select:focus {
+.admin-dashboard-wrapper .time-select:focus {
   outline: none;
   border-color: #3b82f6;
 }
 
-.metrics-grid {
+.admin-dashboard-wrapper .metrics-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.metric-card {
+.admin-dashboard-wrapper .metric-card {
   padding: 1rem;
   background-color: #f8fafc;
   border-radius: 0.5rem;
   border: 1px solid #e2e8f0;
 }
 
-.metric-header {
+.admin-dashboard-wrapper .metric-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
 }
 
-.metric-label {
+.admin-dashboard-wrapper .metric-label {
   font-size: 0.75rem;
   color: #64748b;
   font-weight: 500;
 }
 
-.trend-icon {
+.admin-dashboard-wrapper .trend-icon {
   color: #10b981;
 }
 
-.trend-icon.negative {
+.admin-dashboard-wrapper .trend-icon.negative {
   color: #ef4444;
   transform: rotate(180deg);
 }
 
-.metric-value {
+.admin-dashboard-wrapper .metric-value {
   font-size: 1.25rem;
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 0.25rem;
 }
 
-.metric-trend {
+.admin-dashboard-wrapper .metric-trend {
   font-size: 0.75rem;
   font-weight: 500;
 }
 
-.metric-trend.positive {
+.admin-dashboard-wrapper .metric-trend.positive {
   color: #10b981;
 }
 
-.metric-trend.negative {
+.admin-dashboard-wrapper .metric-trend.negative {
   color: #ef4444;
 }
 
-.chart-placeholder {
+.admin-dashboard-wrapper .chart-placeholder {
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
   overflow: hidden;
 }
 
-.chart-header {
+.admin-dashboard-wrapper .chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -110,19 +110,19 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.chart-title {
+.admin-dashboard-wrapper .chart-title {
   font-size: 1rem;
   font-weight: 600;
   color: #1e293b;
   margin: 0;
 }
 
-.chart-controls {
+.admin-dashboard-wrapper .chart-controls {
   display: flex;
   gap: 0.5rem;
 }
 
-.chart-btn {
+.admin-dashboard-wrapper .chart-btn {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -136,17 +136,17 @@
   transition: all 0.2s;
 }
 
-.chart-btn:hover {
+.admin-dashboard-wrapper .chart-btn:hover {
   background-color: #f9fafb;
 }
 
-.chart-btn.active {
+.admin-dashboard-wrapper .chart-btn.active {
   background-color: #3b82f6;
   color: white;
   border-color: #3b82f6;
 }
 
-.chart-content {
+.admin-dashboard-wrapper .chart-content {
   padding: 2rem;
   height: 200px;
   display: flex;
@@ -154,7 +154,7 @@
   justify-content: center;
 }
 
-.chart-mock {
+.admin-dashboard-wrapper .chart-mock {
   width: 100%;
   height: 100%;
   display: flex;
@@ -162,7 +162,7 @@
   justify-content: space-between;
 }
 
-.chart-bars {
+.admin-dashboard-wrapper .chart-bars {
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -170,7 +170,7 @@
   gap: 0.5rem;
 }
 
-.bar {
+.admin-dashboard-wrapper .bar {
   flex: 1;
   background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
   border-radius: 2px 2px 0 0;
@@ -178,12 +178,12 @@
   transition: all 0.3s ease;
 }
 
-.bar:hover {
+.admin-dashboard-wrapper .bar:hover {
   background: linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
   transform: translateY(-2px);
 }
 
-.chart-labels {
+.admin-dashboard-wrapper .chart-labels {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5rem;

@@ -11,7 +11,7 @@ export default function AdminLayout() {
   };
 
   return (
-    <div>
+    <div className="admin-dashboard-wrapper">
       {/* <h1>Admin Panel</h1>
       <nav>
         <Link to="/admin">Dashboard</Link> |{' '}

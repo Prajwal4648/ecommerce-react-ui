@@ -136,7 +136,7 @@ const ProductForm = ({ initialData, onSubmit, onCancel }) => {
 };
 
 const ProductRow = ({ product, onEdit, onDelete }) => (
-  <li className="product-row card">
+  <li className="product-row admin-card">
     <div className="product-meta">
       <p className="product-name">{product.name}</p>
     </div>
@@ -391,7 +391,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="admin-dash-wrapper full-bleed">
+    <div className="admin-dashboard-wrapper">
       <div className="admin-dashboard">
         <header className="dashboard-header">
           <h1>Admin Dashboard</h1>

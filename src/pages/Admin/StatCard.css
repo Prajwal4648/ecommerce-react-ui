@@ -1,4 +1,4 @@
-.stat-card {
+.admin-dashboard-wrapper .stat-card {
   background-color: white;
   padding: 1.5rem;
   border-radius: 0.75rem;
@@ -6,20 +6,20 @@
   border: 1px solid #e2e8f0;
 }
 
-.stat-header {
+.admin-dashboard-wrapper .stat-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
 }
 
-.stat-label {
+.admin-dashboard-wrapper .stat-label {
   color: #64748b;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.stat-value {
+.admin-dashboard-wrapper .stat-value {
   font-size: 2rem;
   font-weight: 700;
   color: #1e293b;
