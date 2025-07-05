@@ -12,14 +12,7 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-dashboard-wrapper">
-      {/* <h1>Admin Panel</h1>
-      <nav>
-        <Link to="/admin">Dashboard</Link> |{' '}
-        <Link to="/admin/products">Manage Products</Link> |{' '}
-        <Link to="/admin/users">Manage Users</Link> |{' '}
-        <button onClick={handleLogout}>Logout</button>
-      </nav> */}
-      <hr />
+      
       <Outlet />
     </div>
   );
