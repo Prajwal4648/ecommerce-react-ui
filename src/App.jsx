@@ -1,39 +1,45 @@
-import { CartProvider } from './pages/Cart/CartContext';
-import { Routes, Route } from 'react-router-dom';
-
-// Auth
-import Login from './pages/Auth/Login';
-import Register from './pages/Auth/Register';
-import Profile from './pages/Auth/Profile';
-
-// Cart & Order
-import Cart from './pages/Cart/Cart';
-import Checkout from './pages/Cart/Checkout';
-import OrderSummary from './pages/Cart/OrderSummary';
-import OrderSuccess from './pages/Cart/OrderSuccess';
-
-// Product Pages
-import ProductList from './pages/Products/ProductList';
-import ProductDetails from './pages/Products/ProductDetails';
-import SearchResults from './pages/Products/SearchResults';
-
-// Home & Layout
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home/Home';
+import { Routes, Route } from "react-router-dom";
 
 // Admin
-import PrivateRoute from './routes/PrivateRoute';
-import AdminLayout from './pages/Admin'; // index.jsx
-import AdminDashboard from './pages/Admin/AdminDashboard';
+import PrivateRoute from "./routes/PrivateRoute";
+import AdminLayout from "./pages/Admin";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+
+// Auth
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import Profile from "./pages/Auth/Profile";
+
+// Cart & Order
+import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Cart/Checkout";
+import OrderSummary from "./pages/Cart/OrderSummary";
+import OrderSuccess from "./pages/Cart/OrderSuccess";
+
+// Product Pages
+import ProductList from "./pages/Products/ProductList";
+import ProductDetails from "./pages/Products/ProductDetails";
+import SearchResults from "./pages/Products/SearchResults";
+
+{
+  /* Cart Context */
+}
+import { CartProvider } from "./pages/Cart/CartContext";
+
+// Home & Layout
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <CartProvider>
       <Navbar />
       <Routes>
-        {/* ---------- Public ---------- */}
+        {/* Home */}
         <Route path="/" element={<Home />} />
+
+        {/* Login ,regoster and profile */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
@@ -44,9 +50,10 @@ function App() {
         <Route path="/order-summary" element={<OrderSummary />} />
         <Route path="/order-success" element={<OrderSuccess />} />
 
-        {/* Products */}
         <Route path="/products" element={<ProductList />} />
+        <Route path="/products/category/:category" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+
         <Route path="/search" element={<SearchResults />} />
 
         {/* ---------- Protected Admin ---------- */}
