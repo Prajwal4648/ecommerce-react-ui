@@ -340,7 +340,7 @@ const OrdersTab = () => {
 };
 
 /*************************************************************************
-  ANALYTICS TAB  (unchanged)
+  ANALYTICS TAB (updated for vertical list layout)
 *************************************************************************/
 const AnalyticsTab = () => {
   const products = getLS(LS.PRODUCTS, []);
@@ -352,29 +352,31 @@ const AnalyticsTab = () => {
   );
   const outOfStock = products.filter((p) => p.stock === 0).length;
 
+  const analytics = [
+    `💰 Total Revenue: $${totalRevenue.toFixed(2)}`,
+    `📦 Orders Processed: ${orders.length}`,
+    `🚫 Out of Stock Products: ${outOfStock}`,
+    `⭐ Most Viewed: Casual Sneakers`,
+    `📈 Avg Order Value: $${(totalRevenue / orders.length || 0).toFixed(2)}`,
+    `🔁 Returning Users: 16%`
+  ];
+
   return (
-    <div className="products-tab analytics-tab">
+    <section className="analytics-list-wrapper">
       <h3 className="list-heading">Quick Analytics</h3>
-      <div className="analytics-grid">
-        <div className="analytic-card">
-          💰 Total Revenue: ${totalRevenue.toFixed(2)}
+      <div className="analytics-scrollable">
+        <div className="analytics-list">
+          {analytics.map((a, i) => (
+            <div key={i} className="analytic-card">
+              {a}
+            </div>
+          ))}
         </div>
-        <div className="analytic-card">
-          📦 Orders Processed: {orders.length}
-        </div>
-        {/* <div className="analytic-card">
-          🚫 Out of Stock Products: {outOfStock}
-        </div> */}
-        <div className="analytic-card">⭐ Most Viewed: Casual Sneakers</div>
-        <div className="analytic-card">
-          📈 Avg Order Value: $
-          {(totalRevenue / orders.length || 0).toFixed(2)}
-        </div>
-        <div className="analytic-card">🔁 Returning Users: 16%</div>
       </div>
-    </div>
+    </section>
   );
 };
+
 
 /*************************************************************************
   DASHBOARD SHELL  (unchanged)
