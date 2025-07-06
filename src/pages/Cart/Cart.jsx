@@ -78,7 +78,7 @@ const Cart = () => {
           </p>
         )}
 
-        <p>₹{item.price}</p>
+        <p>${item.price}</p>
       </div>
       <div className="quantity-controls">
         <button onClick={() => handleQuantityDecrease(item, item.quantity)}>-</button>
@@ -94,20 +94,20 @@ const Cart = () => {
       <div className="cart-summary">
         <h3>Order Summary</h3>
         <p>
-          Subtotal ({cartItems.length} items) <span>₹{subtotal.toFixed(2)}</span>
+          Subtotal ({cartItems.length} items) <span>${subtotal.toFixed(2)}</span>
         </p>
         <p>
-          Shipping <span>{shipping === 0 ? "Free" : `₹${shipping.toFixed(2)}`}</span>
+          Shipping <span>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span>
         </p>
-        <p>Tax <span>₹{tax.toFixed(2)}</span></p>
+        <p>Tax <span>${tax.toFixed(2)}</span></p>
         {isPromoApplied && (
           <p style={{ color: "green" }}>
-            Discount (QUICK25) <span>-₹{discount.toFixed(2)}</span>
+            Discount (QUICK25) <span>-${discount.toFixed(2)}</span>
           </p>
         )}
         <hr />
         <p className="total">
-          Total <span>₹{total.toFixed(2)}</span>
+          Total <span>${total.toFixed(2)}</span>
         </p>
 
         <button className="checkout-btn" onClick={() => navigate("/checkout")}>

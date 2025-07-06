@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { useCart } from './CartContext';
 import './OrderSummary.css';
+import { MailXIcon } from 'lucide-react';
 
 const OrderSummary = ({ formData, paymentMethod }) => {
   const { cartItems, discount, isPromoApplied } = useCart();
@@ -40,11 +41,11 @@ const OrderSummary = ({ formData, paymentMethod }) => {
         day: 'numeric' 
       }),
       paymentMethod: paymentMethod === 'card' ? 'Card Payment' : 'Cash on Delivery',
-      total: `₹${total.toFixed(2)}`,
-      subtotal: `₹${subtotal.toFixed(2)}`,
-      shipping: shipping === 0 ? 'Free' : `₹${shipping.toFixed(2)}`,
-      tax: `₹${tax.toFixed(2)}`,
-      discount: isPromoApplied ? `₹${discount.toFixed(2)}` : '₹0.00',
+      total: `$${total.toFixed(2)}`,
+      subtotal: `$${subtotal.toFixed(2)}`,
+      shipping: shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`,
+      tax: `$${tax.toFixed(2)}`,
+      discount: isPromoApplied ? `$${discount.toFixed(2)}` : '$0.00',
       customerInfo: {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
@@ -62,8 +63,8 @@ const OrderSummary = ({ formData, paymentMethod }) => {
         id: item.id,
         name: item.title,
         quantity: item.quantity,
-        price: `₹${item.price.toFixed(2)}`,
-        total: `₹${(item.price * item.quantity).toFixed(2)}`,
+        price: `$${item.price.toFixed(2)}`,
+        total: `$${(item.price * item.quantity).toFixed(2)}`,
         image: item.image
       }))
     };
@@ -85,34 +86,34 @@ const OrderSummary = ({ formData, paymentMethod }) => {
               <p className="product-details">{item.size && `Size: ${item.size}`} {item.color && `• Color: ${item.color}`}</p>
               <p className="product-qty">Qty: {item.quantity}</p>
             </div>
-            <p  className="product-prices">₹{(item.price * item.quantity).toFixed(2)}</p>
+            <p  className="product-prices">${(item.price * item.quantity).toFixed(2)}</p>
           </div>
         ))}
       </div>
 
       <div className="price-breakdown">
         <p>
-          Subtotal <span>₹{subtotal.toFixed(2)}</span>
+          Subtotal <span>${subtotal.toFixed(2)}</span>
         </p>
         <p>
-          Shipping <span>{shipping === 0 ? 'Free' : `₹${shipping.toFixed(2)}`}</span>
+          Shipping <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
         </p>
         <p>
-          Tax <span>₹{tax.toFixed(2)}</span>
+          Tax <span>${tax.toFixed(2)}</span>
         </p>
         {isPromoApplied && (
           <p style={{color: 'green'}}>
-            Discount (QUICK25) <span>-₹{discount.toFixed(2)}</span>
+            Discount (QUICK25) <span>-${discount.toFixed(2)}</span>
           </p>
         )}
         <hr />
         <p className="total">
-          Total <span>₹{total.toFixed(2)}</span>
+          Total <span>${total.toFixed(2)}</span>
         </p>
       </div>
 
       <button className="complete-order-btn" onClick={handleCompleteOrder}>
-        Complete Order • ₹{total.toFixed(2)}
+        Complete Order • ${total.toFixed(2)}
       </button>
 
       <div className="order-notes">

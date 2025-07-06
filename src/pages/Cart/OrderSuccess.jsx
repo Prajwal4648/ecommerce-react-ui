@@ -36,7 +36,7 @@ if (!orderDetails) return null;
      
         <div className="success-header">
           <div className="success-icon">
-  <span className="checkmark">✔</span>
+  <span className="checkmarks">✔</span>
 </div>
           <h1 className="success-title">Order Placed Successfully!</h1>
           <p className="success-subtitle">

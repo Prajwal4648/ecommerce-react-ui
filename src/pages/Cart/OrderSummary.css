@@ -50,6 +50,7 @@
   font-weight: 600;
   color: #111;
   margin-bottom: 0.25rem;
+  
 }
 
 .product-details,
@@ -67,9 +68,10 @@
 }
 
 .price-breakdown {
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-top: 1rem;
   line-height: 1.8;
+  font-weight: bolder;
 }
 
 .price-breakdown p {

@@ -23,7 +23,7 @@ const CartTempProduct = () => {
               <img src={product.image} alt={product.title} />
               <div>
                 <h4>{product.title}</h4>
-                <p>₹{product.price}</p>
+                <p>${product.price}</p>
                 <button onClick={() => addToCart(product)}>Add to Cart</button>
               </div>
             </div>
