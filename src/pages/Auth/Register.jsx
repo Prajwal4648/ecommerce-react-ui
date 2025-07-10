@@ -11,10 +11,16 @@ const Register = () => {
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
+   if (password.length < 6) {
+  alert("Password must be at least 6 characters long.");
+  return;
+}
+
+if (password !== confirmPassword) {
+  alert("Passwords don't match.");
+  return;
+}
+
 
     const newUser = {
       email: form.email.value,
@@ -46,7 +52,7 @@ const Register = () => {
 
       const result = await response.json();
       alert("Account created successfully!");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("Registration error:", error);
       alert("Something went wrong. Please try again.");
