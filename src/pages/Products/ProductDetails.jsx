@@ -66,6 +66,14 @@ const ProductDetails = () => {
 
   // Handle add to cart with selected options
   const handleAddToCart = () => {
+    const token = localStorage.getItem('token');
+
+  if (!token) {
+    alert("Please login to add products to your cart.");
+    window.location.href = "/login"; // redirect to login page
+    return;
+  }
+  
     if (showClothingOptions && (!selectedSize || !selectedColor)) {
   alert("Please select both size and color before adding to cart");
   return;
